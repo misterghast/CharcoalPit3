@@ -6,6 +6,7 @@ import charcoalPit.core.ModBlockRegistry;
 import charcoalPit.core.ModTileRegistry;
 import charcoalPit.fluid.ModFluidRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.nbt.CompoundTag;
@@ -38,32 +39,7 @@ public class TileActivePile extends BlockEntity{
 		isCoke=coal;
 		creosote=new FluidTank(1000);
 	}
-	
-	public void tick() {
-		if(!this.level.isClientSide){
-			checkValid();
-			if(burnTime>0){
-				burnTime--;
-				if(burnTime%1000==0)
-					setChanged();
-			}else{
-				if(itemsLeft>0){
-					itemsLeft--;
-					creosote.fill(new FluidStack(ModFluidRegistry.CreosoteStill, isCoke?Config.CokeCreosote.get():Config.CharcoalCreosote.get()), FluidAction.EXECUTE);
-					burnTime=isCoke?Config.CokeTime.get()/10:Config.CharcoalTime.get()/10;
-				}else{
-					this.level.setBlockAndUpdate(this.worldPosition, isCoke?ModBlockRegistry.CoalAsh.defaultBlockState():ModBlockRegistry.WoodAsh.defaultBlockState());
-				}
-			}
-			if(creosote.getFluidAmount()>0){
-				if(this.level.getBlockEntity(this.worldPosition.relative(Direction.DOWN))instanceof TileActivePile){
-					TileActivePile down=(TileActivePile)this.level.getBlockEntity(this.worldPosition.relative(Direction.DOWN));
-					creosote.drain(down.creosote.fill(creosote.getFluid(), FluidAction.EXECUTE), FluidAction.EXECUTE);
-				}
-			}
-		}
-	}
-	
+
 	public void checkValid(){
 		if(!isValid){
 			boolean valid=true;

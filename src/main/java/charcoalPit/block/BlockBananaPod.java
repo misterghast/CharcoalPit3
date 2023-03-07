@@ -2,6 +2,7 @@ package charcoalPit.block;
 
 
 import charcoalPit.core.MethodHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -62,15 +63,15 @@ public class BlockBananaPod extends HorizontalDirectionalBlock implements Boneme
 	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return state.getValue(AGE)<2;
 	}
-	
+
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
-		return true;
+	public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+		return false;
 	}
-	
+
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
-		worldIn.setBlock(pos,state.setValue(AGE,state.getValue(AGE)+1),2);
+	public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+
 	}
 	
 	@Nullable
@@ -95,9 +96,10 @@ public class BlockBananaPod extends HorizontalDirectionalBlock implements Boneme
 	public boolean isRandomlyTicking(BlockState state) {
 		return true;
 	}
-	
+
+
 	@Override
-	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (random.nextFloat()<0.166F) {
 			int i = state.getValue(AGE);
 			if (i < 2 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, worldIn.random.nextInt(5) == 0)) {
@@ -106,7 +108,7 @@ public class BlockBananaPod extends HorizontalDirectionalBlock implements Boneme
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		return MethodHelper.isBlockInTag(worldIn.getBlockState(pos.relative(state.getValue(FACING))),BlockTags.JUNGLE_LOGS);

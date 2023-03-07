@@ -7,6 +7,7 @@ import charcoalPit.core.ModItemRegistry;
 import charcoalPit.fluid.ModFluidRegistry;
 import charcoalPit.gui.BarrelContainer;
 import charcoalPit.tile.TileBarrel;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -42,19 +43,21 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.FluidHandlerBlockEntity;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.network.NetworkHooks;
+import org.jline.utils.InfoCmp;
 
 import javax.annotation.Nullable;
 
@@ -132,7 +135,7 @@ public class BlockBarrel extends Block implements SimpleWaterloggedBlock, Entity
 			InteractionHand handIn, BlockHitResult hit) {
 		if(worldIn.isClientSide)
 			return InteractionResult.SUCCESS;
-		if(player.getItemInHand(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+		if(player.getItemInHand(handIn).getCapability(ForgeCapabilities.FLUID_HANDLER).isPresent()) {
 			if(FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, null))
 					return InteractionResult.SUCCESS;
 		}else if(player.getItemInHand(handIn).getItem()==Items.GLASS_BOTTLE){
@@ -167,7 +170,7 @@ public class BlockBarrel extends Block implements SimpleWaterloggedBlock, Entity
 				return InteractionResult.SUCCESS;
 			}
 		}
-		NetworkHooks.openGui((ServerPlayer)player, new MenuProvider() {
+		NetworkHooks.openScreen((ServerPlayer)player, new MenuProvider() {
 			
 			@Override
 			public AbstractContainerMenu createMenu(int arg0, Inventory arg1, Player arg2) {
@@ -176,7 +179,7 @@ public class BlockBarrel extends Block implements SimpleWaterloggedBlock, Entity
 			
 			@Override
 			public Component getDisplayName() {
-				return new TranslatableComponent("screen.charcoal_pit.barrel");
+				return Component.translatable("screen.charcoal_pit.barrel");
 			}
 		}, pos);
 		return InteractionResult.SUCCESS;
@@ -205,7 +208,7 @@ public class BlockBarrel extends Block implements SimpleWaterloggedBlock, Entity
 			TooltipFlag flagIn) {
 		if(stack.hasTag()&&stack.getTag().contains("Fluid")){
 			FluidStack fluid=FluidStack.loadFluidStackFromNBT(stack.getTag().getCompound("Fluid"));
-			tooltip.add(fluid.getDisplayName().plainCopy().append(new TextComponent(":"+fluid.getAmount())));
+			tooltip.add(fluid.getDisplayName().plainCopy().append(Component.literal(":"+fluid.getAmount())));
 		}
 		super.appendHoverText(stack, worldIn, tooltip, flagIn);
 	}

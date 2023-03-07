@@ -42,16 +42,15 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.entity.EntityLeaveWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -68,18 +67,18 @@ public class PileIgnitr {
 	
 	
 	@SubscribeEvent
-	public static void checkIgnition(NeighborNotifyEvent event){
+	public static void checkIgnition(BlockEvent.NeighborNotifyEvent event){
 		if(!event.isCanceled()&&
-				event.getWorld().getBlockState(event.getPos()).getBlock()==Blocks.FIRE){
+				event.getLevel().getBlockState(event.getPos()).getBlock()==Blocks.FIRE){
 			for(Direction facing:event.getNotifiedSides()){
 				BlockPos pos=event.getPos().relative(facing);
-				if(event.getWorld().getBlockState(pos).getBlock()==ModBlockRegistry.LogPile){
+				if(event.getLevel().getBlockState(pos).getBlock()==ModBlockRegistry.LogPile){
 					//found log pile to ignite
-					igniteLogs(event.getWorld(),pos);
+					igniteLogs(event.getLevel(),pos);
 					
-				}else if(event.getWorld().getBlockState(pos).getBlock()==Blocks.COAL_BLOCK){
+				}else if(event.getLevel().getBlockState(pos).getBlock()==Blocks.COAL_BLOCK){
 					//found coal pile to ignite
-					igniteCoal(event.getWorld(),pos);
+					igniteCoal(event.getLevel(),pos);
 				}
 			}
 		}
@@ -105,14 +104,14 @@ public class PileIgnitr {
 	@SubscribeEvent(priority=EventPriority.HIGH)
 	public static void placeKiln(PlayerInteractEvent.RightClickBlock event) {
 		//undye pots
-		if(!event.isCanceled()&&event.getWorld().getBlockState(event.getPos()).getBlock()==Blocks.WATER_CAULDRON&&
-				event.getWorld().getBlockState(event.getPos()).getValue(LayeredCauldronBlock.LEVEL)>0) {
+		if(!event.isCanceled()&&event.getLevel().getBlockState(event.getPos()).getBlock()==Blocks.WATER_CAULDRON&&
+				event.getLevel().getBlockState(event.getPos()).getValue(LayeredCauldronBlock.LEVEL)>0) {
 			Block block=Block.byItem(event.getItemStack().getItem());
 			if(block instanceof BlockCeramicPot&&block!=ModBlockRegistry.CeramicPot) {
 				ItemStack stack=new ItemStack(ModBlockRegistry.CeramicPot, 1);
 				stack.setTag(event.getItemStack().getTag());
-				event.getPlayer().setItemInHand(event.getHand(), stack);
-				event.getWorld().setBlockAndUpdate(event.getPos(), Blocks.CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, event.getWorld().getBlockState(event.getPos()).getValue(LayeredCauldronBlock.LEVEL)-1));
+				event.getEntity().setItemInHand(event.getHand(), stack);
+				event.getLevel().setBlockAndUpdate(event.getPos(), Blocks.CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, event.getLevel().getBlockState(event.getPos()).getValue(LayeredCauldronBlock.LEVEL)-1));
 				event.setUseBlock(Result.DENY);
 				event.setUseItem(Result.DENY);
 			}
@@ -169,7 +168,7 @@ public class PileIgnitr {
 	public static void mineCopper(PlayerEvent.HarvestCheck event){
 		Block block=event.getTargetBlock().getBlock();
 		if(block==Blocks.COPPER_ORE||block==Blocks.DEEPSLATE_COPPER_ORE||block==Blocks.RAW_COPPER_BLOCK){
-			if(event.getPlayer().getInventory().getSelected().isCorrectToolForDrops(Blocks.COAL_ORE.defaultBlockState()))
+			if(event.getEntity().getInventory().getSelected().isCorrectToolForDrops(Blocks.COAL_ORE.defaultBlockState()))
 				event.setCanHarvest(true);
 		}
 	}
@@ -201,7 +200,7 @@ public class PileIgnitr {
 	
 	@SubscribeEvent
 	public static void aquaAffinity(PlayerEvent.BreakSpeed event){
-		if(event.getPlayer().isEyeInFluid(FluidTags.WATER)&&isOrichalcumTool(event.getPlayer().getMainHandItem().getItem())&&!EnchantmentHelper.hasAquaAffinity(event.getPlayer())){
+		if(event.getEntity().isEyeInFluid(FluidTags.WATER)&&isOrichalcumTool(event.getEntity().getMainHandItem().getItem())&&!EnchantmentHelper.hasAquaAffinity(event.getEntity())){
 			event.setNewSpeed(event.getNewSpeed()*5);
 		}
 	}
@@ -215,10 +214,10 @@ public class PileIgnitr {
 	
 	@SubscribeEvent
 	public static void WrathLanternKill(LivingDeathEvent event){
-		if(!event.getEntityLiving().level.isClientSide()&&event.getSource().getEntity() instanceof LivingEntity &&!(event.getSource().getEntity() instanceof Player)){
+		if(!event.getEntity().level.isClientSide()&&event.getSource().getEntity() instanceof LivingEntity &&!(event.getSource().getEntity() instanceof Player)){
 			//entity exists but not player
-			Level level=event.getEntityLiving().level;
-			BlockPos entityPos=event.getEntityLiving().blockPosition();
+			Level level=event.getEntity().level;
+			BlockPos entityPos=event.getEntity().blockPosition();
 			for(int i=-1;i<2;i+=1){
 				for(int j=-1;j<2;j+=1){
 					LevelChunk chunk=level.getChunkAt(entityPos.offset(i*16,0,j*16));
@@ -226,7 +225,7 @@ public class PileIgnitr {
 						if(entry.getValue() instanceof TileWrathLantern){
 							BlockPos pos=entry.getValue().getBlockPos();
 							if(Math.abs(pos.getX()-entityPos.getX())<=4&&Math.abs(pos.getY()-entityPos.getY())<=4&&Math.abs(pos.getZ()-entityPos.getZ())<=4){
-								event.getEntityLiving().setLastHurtByPlayer(FakePlayerFactory.getMinecraft((ServerLevel) level));
+								event.getEntity().setLastHurtByPlayer(FakePlayerFactory.getMinecraft((ServerLevel) level));
 								return;
 							}
 						}

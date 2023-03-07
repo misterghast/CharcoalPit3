@@ -6,7 +6,6 @@ import charcoalPit.recipe.FluidIngredient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -71,9 +70,10 @@ public class ItemAirplane extends Item {
 	public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pFlag) {
 		if(stack.hasTag()&&stack.getTag().contains("Fluid")){
 			FluidStack fluid=FluidStack.loadFluidStackFromNBT(stack.getTag().getCompound("Fluid"));
-			tooltip.add(fluid.getDisplayName().plainCopy().append(new TextComponent(":"+fluid.getAmount())));
+			tooltip.add(fluid.getDisplayName().plainCopy().append(Component.literal(":"+fluid.getAmount())));
 		}else{
-			tooltip.add(new TextComponent("Empty"));
+			tooltip.add(Component.translatable("charcoalpit:emptymessage"));
+			//empty
 		}
 		super.appendHoverText(stack, pLevel, tooltip, pFlag);
 	}

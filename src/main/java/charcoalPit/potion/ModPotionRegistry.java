@@ -5,7 +5,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -153,7 +152,7 @@ public class ModPotionRegistry {
             new MobEffectInstance(MobEffects.GLOWING,20*60*3));
 
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void registerEffects(RegistryEvent.Register<MobEffect> event){
         event.getRegistry().registerAll(DRUNK.setRegistryName("drunk"),ROULETTE.setRegistryName("roulette"),POISON_RESISTANCE.setRegistryName("poison_resistance"),
                 WITHER_RESISTANCE.setRegistryName("wither_resistance"));
@@ -164,6 +163,6 @@ public class ModPotionRegistry {
                 BEETROOT_BEER.setRegistryName("beetroot_beer"),SWEETBERRY_WINE.setRegistryName("sweetberry_wine"),MEAD.setRegistryName("mead"),
                 BEER.setRegistryName("beer"),RUM.setRegistryName("rum"),CHORUS_CIDER.setRegistryName("chorus_cider"),SPIDER_SPIRIT.setRegistryName("spider_spirit"),
                 HONEY_DEWOIS.setRegistryName("honey_dewois"),WARPED_WINE.setRegistryName("warped_wine"),GLOWBERRY_WINE.setRegistryName("glowberry_wine"));
-    }
+    }*/
 
 }

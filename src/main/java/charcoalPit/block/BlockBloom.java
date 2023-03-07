@@ -3,7 +3,6 @@ package charcoalPit.block;
 import charcoalPit.tile.TileBloom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -93,7 +92,7 @@ public class BlockBloom extends Block implements EntityBlock {
 		super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
 		if(pStack.hasTag()&&pStack.getTag().contains("items")) {
 			ItemStack stack = ItemStack.of(pStack.getTag().getCompound("items"));
-			pTooltip.add(new TextComponent("").append(stack.getHoverName()).append(new TextComponent(" x" + stack.getCount())));
+			pTooltip.add(Component.literal("").append(stack.getHoverName()).append(Component.literal(" x" + stack.getCount())));
 		}
 	}
 }

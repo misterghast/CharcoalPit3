@@ -12,7 +12,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -80,7 +79,7 @@ public class SquisherRecipe implements Recipe<Container> {
 		return SQUISH_RECIPE;
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<SquisherRecipe>{
+	public static class Serializer /*extends ForgeRegistryEntry<RecipeSerializer<?>>*/ implements RecipeSerializer<SquisherRecipe>{
 		
 		@Override
 		public SquisherRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {

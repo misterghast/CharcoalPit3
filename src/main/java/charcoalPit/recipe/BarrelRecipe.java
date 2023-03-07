@@ -20,7 +20,6 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class BarrelRecipe implements Recipe<Container>{
 	
@@ -110,7 +109,7 @@ public class BarrelRecipe implements Recipe<Container>{
 		return BARREL_RECIPE;
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BarrelRecipe>{
+	public static class Serializer implements RecipeSerializer<BarrelRecipe>{
 
 		@Override
 		public BarrelRecipe fromJson(ResourceLocation recipeId, JsonObject json) {

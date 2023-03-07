@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -31,8 +31,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -96,11 +96,11 @@ public class BlockDistillery extends HorizontalDirectionalBlock implements Entit
 	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
 		if(pLevel.isClientSide)
 			return InteractionResult.SUCCESS;
-		if(pPlayer.getItemInHand(pHand).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+		if(pPlayer.getItemInHand(pHand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) {
 			if (FluidUtil.interactWithFluidHandler(pPlayer, pHand, pLevel, pPos, null))
 				return InteractionResult.SUCCESS;
 		}
-		NetworkHooks.openGui((ServerPlayer)pPlayer, new MenuProvider() {
+		NetworkHooks.openScreen((ServerPlayer)pPlayer, new MenuProvider() {
 			
 			@Override
 			public AbstractContainerMenu createMenu(int arg0, Inventory arg1, Player arg2) {
@@ -109,7 +109,7 @@ public class BlockDistillery extends HorizontalDirectionalBlock implements Entit
 			
 			@Override
 			public Component getDisplayName() {
-				return new TranslatableComponent("screen.charcoal_pit.distillery");
+				return Component.translatable("screen.charcoal_pit.distillery");
 			}
 		}, pPos);
 		return InteractionResult.SUCCESS;

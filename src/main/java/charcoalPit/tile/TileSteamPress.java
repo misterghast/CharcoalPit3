@@ -111,7 +111,7 @@ public class TileSteamPress extends BlockEntity {
 		if(processTotal>0&&burnTime<=0){
 			int f=ForgeHooks.getBurnTime(inventory.getStackInSlot(1),RecipeType.SMELTING);
 			if(f>0){
-				ItemStack container=inventory.getStackInSlot(1).getContainerItem().copy();
+				ItemStack container=inventory.getStackInSlot(1).getCraftingRemainingItem().copy();
 				burnTime=f;
 				burnTotal=f;
 				inventory.extractItem(1,1,false);

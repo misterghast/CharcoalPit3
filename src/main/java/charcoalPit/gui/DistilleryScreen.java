@@ -9,7 +9,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -70,8 +70,8 @@ public class DistilleryScreen extends AbstractContainerScreen<DistilleryContaine
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 		this.renderTooltip(pPoseStack, pMouseX, pMouseY);
 		MethodHelper.drawFluidTooltip(this,FluidStack.loadFluidStackFromNBT(this.menu.fluid_tag.getStackInSlot(0).getOrCreateTag().getCompound("fluid1")),
-				16000,pMouseX,pMouseY,62,16,95,33,pPoseStack,new TranslatableComponent("tooltip.charcoal_pit.fluid_empty"));
+				16000,pMouseX,pMouseY,62,16,95,33,pPoseStack,Component.translatable("tooltip.charcoal_pit.fluid_empty"));
 		MethodHelper.drawFluidTooltip(this,FluidStack.loadFluidStackFromNBT(this.menu.fluid_tag.getStackInSlot(0).getOrCreateTag().getCompound("fluid2")),
-				4000,pMouseX,pMouseY,97,39,114,69,pPoseStack,new TranslatableComponent("tooltip.charcoal_pit.fluid_empty"));
+				4000,pMouseX,pMouseY,97,39,114,69,pPoseStack,Component.translatable("tooltip.charcoal_pit.fluid_empty"));
 	}
 }

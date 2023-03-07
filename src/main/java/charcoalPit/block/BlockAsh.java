@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -33,15 +34,17 @@ import net.minecraft.server.level.ServerLevel;
 
 public class BlockAsh extends FallingBlock{
 
+	private static Random rand = new Random();
+
 	public BlockAsh() {
 		super(Properties.of(Material.SAND, MaterialColor.COLOR_LIGHT_GRAY).strength(0.5F).sound(SoundType.SAND));
 	}
-	
+
 	@Override
-	public int getExpDrop(BlockState state, LevelReader world, BlockPos pos, int fortune, int silktouch) {
-		return silktouch==0?this.RANDOM.nextInt(3):0;
+	public int getExpDrop(BlockState state, LevelReader level, RandomSource randomSource, BlockPos pos, int fortuneLevel, int silkTouchLevel) {
+		return silkTouchLevel==0?this.rand.nextInt(3):0;
 	}
-	
+
 	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
 	      if (worldIn.isEmptyBlock(pos.below()) || isFree(worldIn.getBlockState(pos.below())) && pos.getY() >= 0) {
 	         FallingBlockEntity fallingblockentity = new FallingBlockEntity(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, worldIn.getBlockState(pos)) {

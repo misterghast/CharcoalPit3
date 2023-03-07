@@ -150,8 +150,8 @@ public class TileBlastFurnace extends BlockEntity {
 				burnTime=i;
 				burnTotal=i;
 				ItemStack container=ItemStack.EMPTY;
-				if(inventory.getStackInSlot(FUEL).hasContainerItem()){
-					container=inventory.getStackInSlot(FUEL).getContainerItem().copy();
+				if(inventory.getStackInSlot(FUEL).isEmpty()){
+					container=inventory.getStackInSlot(FUEL).copy();
 				}
 				inventory.extractItem(FUEL, 1, false);
 				if(!container.isEmpty()){

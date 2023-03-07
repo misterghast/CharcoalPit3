@@ -1,6 +1,7 @@
 package charcoalPit.recipe;
 
 import charcoalPit.core.MethodHelper;
+import charcoalPit.fluid.ModFluidRegistry;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -95,10 +96,10 @@ public class FluidIngredient {
 			mode+=2;
 		buffer.writeByte(mode);
 		if((mode&1)==1) {
-			buffer.writeResourceLocation(fluid.getRegistryName());
+			buffer.writeResourceLocation(ForgeRegistries.FLUIDS.getKey(getFluid()));
 		}
 		if((mode&2)==2) {
-			buffer.writeResourceLocation(getFluid().getRegistryName());
+			buffer.writeResourceLocation(ForgeRegistries.FLUIDS.getKey(getFluid()));
 		}
 		buffer.writeInt(amount);
 		if(nbt!=null) {

@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class BlockAlcohol extends LiquidBlock{
 	
 	public BlockAlcohol() {
-		super(()->ModFluidRegistry.AlcoholStill, Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops());
+		super(()->ModFluidRegistry.AlcoholStill, Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable());
 	}
 	
 	@Override

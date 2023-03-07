@@ -90,11 +90,12 @@ public class Airplane extends Mob {
 	public Entity getControllingPassenger() {
 		return this.getFirstPassenger();
 	}
-	
-	@Override
+
+
+	/*@Override
 	public boolean canBeControlledByRider() {
 		return getControllingPassenger() instanceof Player;
-	}
+	}*/
 	
 	@Override
 	protected InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {

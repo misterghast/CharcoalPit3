@@ -186,8 +186,8 @@ public class TileBloomeryy extends BlockEntity {
 				burnTime=i;
 				burnTotal=i;
 				ItemStack container=ItemStack.EMPTY;
-				if(inventory.getStackInSlot(1).hasContainerItem()){
-					container=inventory.getStackInSlot(1).getContainerItem().copy();
+				if(inventory.getStackInSlot(1).isEmpty()){
+					container=inventory.getStackInSlot(1).copy();
 				}
 				inventory.extractItem(1, 1, false);
 				if(!container.isEmpty()){

@@ -4,6 +4,7 @@ import charcoalPit.core.ModFeatures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,9 +29,14 @@ public class DragonFoliagePlacer extends FoliagePlacer {
 	protected FoliagePlacerType<?> type() {
 		return ModFeatures.DRAGON_PLACER;
 	}
-	
+
 	@Override
-	protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, TreeConfiguration pConfig,
+	protected boolean shouldSkipLocation(RandomSource pRandom, int pLocalX, int pLocalY, int pLocalZ, int pRange, boolean pLarge) {
+		return false;
+	}
+
+	@Override
+	protected void createFoliage(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, TreeConfiguration pConfig,
 								 int pMaxFreeTreeHeight, FoliageAttachment pAttachment, int pFoliageHeight, int pFoliageRadius, int pOffset) {
 		for(int i=pOffset;i>=pOffset-pFoliageHeight;--i){
 			this.placeLeavesRow(pLevel,pBlockSetter,pRandom,pConfig,pAttachment.pos(),1,i,pAttachment.doubleTrunk());
@@ -38,7 +44,7 @@ public class DragonFoliagePlacer extends FoliagePlacer {
 	}
 	
 	@Override
-	public int foliageHeight(Random p_230374_1_, int p_230374_2_, TreeConfiguration p_230374_3_) {
+	public int foliageHeight(RandomSource p_230374_1_, int p_230374_2_, TreeConfiguration p_230374_3_) {
 		return 2;
 	}
 	

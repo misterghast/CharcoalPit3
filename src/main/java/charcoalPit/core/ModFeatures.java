@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.TreeFeatures;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -42,6 +42,8 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod.EventBusSubscriber(modid=CharcoalPit.MODID, bus= Mod.EventBusSubscriber.Bus.MOD)
 public class ModFeatures {
@@ -63,8 +65,13 @@ public class ModFeatures {
 	public static Holder<ConfiguredFeature<?, ?>> ORANGE;
 	
 	@SubscribeEvent
-	public static void registerPlacers(RegistryEvent.Register<FoliagePlacerType<?>> event){
-		event.getRegistry().registerAll(DRAGON_PLACER.setRegistryName("dragon_placer"),OLIVE_PLACER.setRegistryName("olive_placer"),ORANGE_PLACER.setRegistryName("orange_placer"));
+	public static void registerPlacers(RegisterEvent event){
+		event.register(ForgeRegistries.Keys.FOLIAGE_PLACER_TYPES, helper -> {
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "dragon_placer"), DRAGON_PLACER);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "olive_placer"), OLIVE_PLACER);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "orange_placer"), ORANGE_PLACER);
+
+		});
 	}
 	
 	
@@ -100,7 +107,7 @@ public class ModFeatures {
 		
 		@Nullable
 		@Override
-		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean largeHive) {
+		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomIn, boolean largeHive) {
 			return APPLE;
 		}
 	}
@@ -108,7 +115,7 @@ public class ModFeatures {
 		
 		@Nullable
 		@Override
-		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean largeHive) {
+		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomIn, boolean largeHive) {
 			return CHERRY;
 		}
 	}
@@ -116,7 +123,7 @@ public class ModFeatures {
 		
 		@Nullable
 		@Override
-		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean largeHive) {
+		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomIn, boolean largeHive) {
 			return DRAGON;
 		}
 	}
@@ -124,7 +131,7 @@ public class ModFeatures {
 		
 		@Nullable
 		@Override
-		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean largeHive) {
+		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomIn, boolean largeHive) {
 			return OLIVE;
 		}
 	}
@@ -132,7 +139,7 @@ public class ModFeatures {
 		
 		@Nullable
 		@Override
-		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean largeHive) {
+		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomIn, boolean largeHive) {
 			return ORANGE;
 		}
 	}
@@ -140,13 +147,13 @@ public class ModFeatures {
 		
 		@Nullable
 		@Override
-		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean largeHive) {
+		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource randomIn, boolean largeHive) {
 			return null;
 		}
 		
 		@Nullable
 		@Override
-		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredMegaFeature(Random rand) {
+		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource rand) {
 			return CHESTNUT;
 		}
 	}

@@ -3,7 +3,6 @@ package charcoalPit.item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -81,14 +80,14 @@ public class ItemAnimalCage extends Item {
 	}
 	
 	@Override
-	public int getItemStackLimit(ItemStack stack) {
+	public int getMaxStackSize(ItemStack stack) {
 		return stack.hasTag()?1:16;
 	}
 	
 	@Override
 	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 		if(pStack.hasTag()&&pStack.getTag().contains("AnimalName")){
-			pTooltipComponents.add(new TextComponent(pStack.getTag().getString("AnimalName")));
+			pTooltipComponents.add(Component.literal(pStack.getTag().getString("AnimalName")));
 		}
 		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 	}

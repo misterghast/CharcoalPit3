@@ -24,7 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class OreKilnRecipe implements Recipe<Container>{
 	
@@ -174,7 +173,7 @@ public class OreKilnRecipe implements Recipe<Container>{
 	}
 	//////////////////////////////////////////////
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<OreKilnRecipe>{
+	public static class Serializer /*extends ForgeRegistryEntry<RecipeSerializer<?>>*/ implements RecipeSerializer<OreKilnRecipe>{
 
 		@Override
 		public OreKilnRecipe fromJson(ResourceLocation recipeId, JsonObject json) {

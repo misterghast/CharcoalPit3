@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class BlockCreosote extends LiquidBlock{
 
 	public BlockCreosote() {
-		super(()->ModFluidRegistry.CreosoteStill, Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops());
+		super(()->ModFluidRegistry.CreosoteStill, Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable());
 	}
 	
 	@Override

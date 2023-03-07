@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.network.chat.TextComponent;
+
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +16,8 @@ import com.mojang.math.Matrix4f;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -48,10 +50,11 @@ public class BarrelScreen extends AbstractContainerScreen<BarrelContainer>{
 		if(fluid.isEmpty())
 			return;
 		int height=(int)(58*fluid.getAmount()/16000D);
+		IClientFluidTypeExtensions client_extensions_fluid = IClientFluidTypeExtensions.of(fluid.getFluid().getFluidType());
 		RenderSystem.setShaderTexture(0,InventoryMenu.BLOCK_ATLAS);
 		//Minecraft.getInstance().getTextureManager().bindForSetup(InventoryMenu.BLOCK_ATLAS);
-		TextureAtlasSprite sprite=this.minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getFluid().getAttributes().getStillTexture());
-		int c=fluid.getFluid().getAttributes().getColor(fluid);
+		TextureAtlasSprite sprite=this.minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(client_extensions_fluid.getStillTexture());
+		int c=client_extensions_fluid.getTintColor();
 		RenderSystem.setShaderColor((c>>16&255)/255.0F, (c>>8&255)/255.0F, (c&255)/255.0F, 1F/*(c>>24&255)/255f*/);
 		//blit(matrixStack, i+62, j+71-height, this.getBlitOffset(), 16, height+1, sprite);
 		while(height>=16) {
@@ -64,7 +67,7 @@ public class BarrelScreen extends AbstractContainerScreen<BarrelContainer>{
 		//innerBlit(matrixStack.getLast().getMatrix(), i+62, i+62+16, j+72-height, j+72, this.getBlitOffset(), sprite.getMinU(), sprite.getMaxU(), sprite.getMinV(), sprite.getMaxV());
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		//this.blit(matrixStack, i+62, j+71-height, (int)(sprite.getWidth()*sprite.getMinU()), (int)(sprite.getHeight()*sprite.getMinV()), 16, height);
-		/*minecraft.getTextureManager().bindTexture(fluid.getFluid().getAttributes().getStillTexture());
+		/*minecraft.getTextureManager().bindTexture(fluid.getFluid().getFluidType().getStillTexture());
 		this.blit(matrixStack, i+62, j+71-height, 0, 0, 16, height);*/
 	}
 	
@@ -77,7 +80,7 @@ public class BarrelScreen extends AbstractContainerScreen<BarrelContainer>{
 	      bufferbuilder.vertex(matrix, (float)x2, (float)y1, (float)blitOffset).uv(maxU, minV).endVertex();
 	      bufferbuilder.vertex(matrix, (float)x1, (float)y1, (float)blitOffset).uv(minU, minV).endVertex();
 	      bufferbuilder.end();
-	      BufferUploader.end(bufferbuilder);
+	      //BufferUploader.end(bufferbuilder);
 	   }
 	
 	@Override
@@ -113,7 +116,7 @@ public class BarrelScreen extends AbstractContainerScreen<BarrelContainer>{
 		if(!stack.isEmpty()&&isMouseOverRect(mousex,mousey,x1,x2,y1,y2)) {
 			ArrayList<Component> list = new ArrayList<>();
 			list.add(stack.getDisplayName());
-			list.add(new TextComponent(stack.getAmount() + "/" + (stack.getFluid().getAttributes().isGaseous() ? 64 * cap : cap) + " mB"));
+			list.add(Component.literal(stack.getAmount() + "/" + (stack.getFluid().getFluidType().isLighterThanAir() ? 64 * cap : cap) + " mB"));
 			Optional<TooltipComponent> tooltipComponent = Optional.empty();
 			this.renderTooltip(matrix, list, tooltipComponent, mousex, mousey, ItemStack.EMPTY);
 		}

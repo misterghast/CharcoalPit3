@@ -41,10 +41,12 @@ public class BlockFeedingThrough extends Block implements EntityBlock {
 	
 	@Nullable
 	@Override
-	public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
+	public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
 		return BlockPathTypes.FENCE;
 	}
-	
+
+
+
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
 		pBuilder.add(ROTATED,HAS_BAY);
@@ -79,7 +81,7 @@ public class BlockFeedingThrough extends Block implements EntityBlock {
 		else{
 			BlockEntity e=pLevel.getBlockEntity(pPos);
 			if(e instanceof TileFeedingThrough tile){
-				if(pPlayer.getItemInHand(pHand).isEmpty()){
+				if(pPlayer.getItemInHand(pHand).hasCraftingRemainingItem()){
 					pPlayer.setItemInHand(pHand,tile.inventory.extractItem(0,64,false));
 					pLevel.playSound(null,pPos,SoundEvents.GRASS_BREAK,SoundSource.PLAYERS,1F,1F);
 					pLevel.setBlock(pPos,pState.setValue(HAS_BAY,!tile.inventory.getStackInSlot(0).isEmpty()),3);

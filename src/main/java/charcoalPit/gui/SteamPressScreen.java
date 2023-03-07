@@ -6,10 +6,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 
 public class SteamPressScreen extends AbstractContainerScreen<SteamPressContainer> {
@@ -63,10 +64,11 @@ public class SteamPressScreen extends AbstractContainerScreen<SteamPressContaine
 		this.renderBackground(pPoseStack);
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 		this.renderTooltip(pPoseStack, pMouseX, pMouseY);
+		IClientFluidTypeExtensions client_extensions = IClientFluidTypeExtensions.of(Fluids.WATER);
 		MethodHelper.drawFluidTooltip(this,FluidStack.loadFluidStackFromNBT(this.menu.fluid_tag.getStackInSlot(0).getOrCreateTag().getCompound("fluid1")),
-				1000,pMouseX,pMouseY,108,16,125,33,pPoseStack, new TranslatableComponent(Fluids.WATER.getAttributes().getTranslationKey()));
+				1000,pMouseX,pMouseY,108,16,125,33,pPoseStack, Component.translatable(Fluids.WATER.getFluidType().getDescriptionId()));
 		MethodHelper.drawFluidTooltip(this,FluidStack.loadFluidStackFromNBT(this.menu.fluid_tag.getStackInSlot(0).getOrCreateTag().getCompound("fluid2")),
-				8000,pMouseX,pMouseY,56,52,89,69,pPoseStack,new TranslatableComponent("tooltip.charcoal_pit.fluid_empty"));
+				8000,pMouseX,pMouseY,56,52,89,69,pPoseStack,Component.translatable("tooltip.charcoal_pit.fluid_empty"));
 	}
 	
 }

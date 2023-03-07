@@ -14,7 +14,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -94,7 +93,7 @@ public class DistilleryRecipe implements Recipe<Container> {
 		return DISTILLERY_RECIPE;
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<DistilleryRecipe>{
+	public static class Serializer /*extends ForgeRegistryEntry<RecipeSerializer<?>>*/ implements RecipeSerializer<DistilleryRecipe>{
 		
 		@Override
 		public DistilleryRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {

@@ -37,7 +37,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -59,7 +59,7 @@ public class BlockCeramicPot extends Block implements EntityBlock {
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player,
 			InteractionHand handIn, BlockHitResult hit) {
 		if(!worldIn.isClientSide) {
-			NetworkHooks.openGui((ServerPlayer)player, new MenuProvider() {
+			NetworkHooks.openScreen((ServerPlayer)player, new MenuProvider() {
 				
 				@Override
 				public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
@@ -68,7 +68,7 @@ public class BlockCeramicPot extends Block implements EntityBlock {
 				
 				@Override
 				public Component getDisplayName() {
-					return new TranslatableComponent("screen.charcoal_pit.ceramic_pot");
+					return Component.translatable("screen.charcoal_pit.ceramic_pot");
 				}
 			}, pos);;
 		}

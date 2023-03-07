@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -33,19 +32,20 @@ public class ItemAeternalis extends Item{
 	}
 	
 	@Override
-	public ItemStack getContainerItem(ItemStack itemStack) {
+	public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
 		return new ItemStack(this);
 	}
-	
+
 	@Override
-	public boolean hasContainerItem(ItemStack stack) {
+	public boolean hasCraftingRemainingItem(ItemStack stack) {
 		return true;
 	}
 	
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		tooltip.add(new TextComponent(ChatFormatting.LIGHT_PURPLE+"An ancient relic that poseses the power to burn eternal"));
+		//"An ancient relic that possesses the power to burn eternal"
+		tooltip.add(Component.translatable("charcoalpit:aeternalistooltip").withStyle(ChatFormatting.LIGHT_PURPLE));
 	}
 
 }

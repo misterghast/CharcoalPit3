@@ -105,7 +105,7 @@ public class TileDistillery extends BlockEntity {
 		if(processTotal>0&&burnTime<=0){
 			int f= ForgeHooks.getBurnTime(fuel.getStackInSlot(0), RecipeType.SMELTING);
 			if(f>0){
-				ItemStack container=fuel.getStackInSlot(0).getContainerItem().copy();
+				ItemStack container=fuel.getStackInSlot(0).getCraftingRemainingItem().copy();
 				burnTime=f;
 				burnTotal=f;
 				fuel.extractItem(0,1,false);

@@ -38,7 +38,7 @@ public class ItemBarrel extends BlockItem {
         return new FluidHandlerItemStack(stack,16000){
             @Override
             public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
-                return stack.getFluid().getAttributes().getTemperature()<450&&!stack.getFluid().getAttributes().isGaseous();
+                return stack.getFluid().getFluidType().getTemperature()<450&&!stack.getFluid().getFluidType().isLighterThanAir();
             }
 
             @Override
@@ -49,10 +49,10 @@ public class ItemBarrel extends BlockItem {
     }
     
     @Override
-    public int getItemStackLimit(ItemStack stack) {
+    public int getMaxStackSize(ItemStack stack) {
         if(stack.hasTag()&&stack.getTag().contains("Fluid"))
-            return FluidStack.loadFluidStackFromNBT(stack.getTag().getCompound("Fluid")).isEmpty()?super.getItemStackLimit(stack):1;
-        return super.getItemStackLimit(stack);
+            return FluidStack.loadFluidStackFromNBT(stack.getTag().getCompound("Fluid")).isEmpty()?super.getMaxStackSize(stack):1;
+        return super.getMaxStackSize(stack);
     }
     
     public static boolean isFluidEmpty(ItemStack stack){

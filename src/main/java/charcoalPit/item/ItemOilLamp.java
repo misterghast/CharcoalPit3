@@ -7,7 +7,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -88,9 +87,9 @@ public class ItemOilLamp extends ItemNameBlockItem {
 	public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pFlag) {
 		if(stack.hasTag()&&stack.getTag().contains("Fluid")){
 			FluidStack fluid=FluidStack.loadFluidStackFromNBT(stack.getTag().getCompound("Fluid"));
-			tooltip.add(fluid.getDisplayName().plainCopy().append(new TextComponent(":"+fluid.getAmount())));
+			tooltip.add(fluid.getDisplayName().plainCopy().append(Component.literal(":"+fluid.getAmount())));
 		}else{
-			tooltip.add(new TextComponent("Empty"));
+			tooltip.add(Component.translatable("charcoalpit:emptymessage"));
 		}
 		super.appendHoverText(stack, pLevel, tooltip, pFlag);
 	}

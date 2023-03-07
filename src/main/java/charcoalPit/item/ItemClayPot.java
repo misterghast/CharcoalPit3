@@ -1,5 +1,6 @@
 package charcoalPit.item;
 
+import java.awt.*;
 import java.util.List;
 
 import charcoalPit.core.ModItemRegistry;
@@ -17,9 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -40,13 +39,13 @@ public class ItemClayPot extends Item{
 			ItemStackHandler inv=new ItemStackHandler();
 			inv.deserializeNBT(stack.getTag().getCompound("inventory"));
 			if(OreKilnRecipe.oreKilnIsEmpty(inv)) {
-				tooltip.add(new TextComponent("Empty"));
+				tooltip.add(Component.literal("Empty"));
 			}else {
 				ItemStack out=OreKilnRecipe.OreKilnGetOutput(stack.getTag().getCompound("inventory"), Minecraft.getInstance().level);
 				if(out.isEmpty()) {
-					tooltip.add(new TextComponent(ChatFormatting.DARK_RED+"Invalid"+" ("+OreKilnRecipe.oreKilnGetOreAmount(inv)+"/8)"));
+					tooltip.add(Component.literal(ChatFormatting.DARK_RED+"Invalid"+" ("+OreKilnRecipe.oreKilnGetOreAmount(inv)+"/8)"));
 				}else {
-					Component tx=out.getHoverName().plainCopy().append(new TextComponent(" x"+out.getCount()));
+					Component tx=out.getHoverName().plainCopy().append(Component.literal(" x"+out.getCount()));
 					tx.getStyle().applyFormat(ChatFormatting.GREEN);
 					tooltip.add(tx);
 				}
@@ -54,15 +53,15 @@ public class ItemClayPot extends Item{
 		}*/
 		if(stack.hasTag()&&stack.getTag().contains("result")){
 			if(stack.getTag().getBoolean("empty")){
-				tooltip.add(new TextComponent("Empty"));
+				tooltip.add(Component.literal("Empty"));
 			}else{
 				ItemStack result=ItemStack.of(stack.getTag().getCompound("result"));
 				ItemStackHandler inv=new ItemStackHandler();
 				inv.deserializeNBT(stack.getTag().getCompound("inventory"));
 				if(result.isEmpty()){
-					tooltip.add(new TextComponent(ChatFormatting.DARK_RED+"Invalid"+" ("+OreKilnRecipe.oreKilnGetOreAmount(inv)+"/8)"));
+					tooltip.add(Component.literal(ChatFormatting.DARK_RED+"Invalid"+" ("+OreKilnRecipe.oreKilnGetOreAmount(inv)+"/8)"));
 				}else{
-					tooltip.add(new TextComponent(ChatFormatting.GREEN+"").append(result.getHoverName()).append(new TextComponent(" x"+result.getCount())).withStyle(ChatFormatting.GREEN));
+					tooltip.add(Component.literal(ChatFormatting.GREEN+"").append(result.getHoverName()).append(Component.literal(" x"+result.getCount())).withStyle(ChatFormatting.GREEN));
 				}
 			}
 		}
@@ -71,7 +70,7 @@ public class ItemClayPot extends Item{
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
 		if(!worldIn.isClientSide)
-			NetworkHooks.openGui((ServerPlayer)playerIn, new MenuProvider() {
+			NetworkHooks.openScreen((ServerPlayer)playerIn, new MenuProvider() {
 				
 				@Override
 				public AbstractContainerMenu createMenu(int arg0, Inventory arg1, Player arg2) {
@@ -80,8 +79,9 @@ public class ItemClayPot extends Item{
 				
 				@Override
 				public Component getDisplayName() {
-					return new TranslatableComponent("screen.charcoal_pit.clay_pot");
+					return Component.translatable("screen.charcoal_pit.clay_pot");
 				}
+
 			},buf->buf.writeByte((byte)playerIn.getInventory().selected));
 		return super.use(worldIn, playerIn, handIn);
 	}

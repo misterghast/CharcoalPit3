@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -30,7 +31,7 @@ public class DoubleTrunkPlacer extends GiantTrunkPlacer {
 		return ModFeatures.DOUBLE_PLACER;
 	}
 	
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
 		BlockPos blockpos = pPos.below();
 		setDirtAt(pLevel, pBlockSetter, pRandom, blockpos, pConfig);
 		setDirtAt(pLevel, pBlockSetter, pRandom, blockpos.east(), pConfig);
@@ -48,7 +49,7 @@ public class DoubleTrunkPlacer extends GiantTrunkPlacer {
 		return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pPos.above(pFreeTreeHeight-1), 0, true));
 	}
 	
-	private static void placeLogIfFreeWithOffset(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, BlockPos.MutableBlockPos pPos, TreeConfiguration pConfig, BlockPos pOffsetPos, int pOffsetX, int pOffsetY, int pOffsetZ) {
+	private void placeLogIfFreeWithOffset(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, BlockPos.MutableBlockPos pPos, TreeConfiguration pConfig, BlockPos pOffsetPos, int pOffsetX, int pOffsetY, int pOffsetZ) {
 		pPos.setWithOffset(pOffsetPos, pOffsetX, pOffsetY, pOffsetZ);
 		placeLogIfFree(pLevel, pBlockSetter, pRandom, pPos, pConfig);
 	}

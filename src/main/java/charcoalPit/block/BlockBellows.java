@@ -5,6 +5,7 @@ import java.util.Random;
 import charcoalPit.core.ModBlockRegistry;
 import charcoalPit.tile.TileBlastFurnace;
 import charcoalPit.tile.TileBloomeryy;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.DirectionalBlock;
@@ -95,9 +96,9 @@ public class BlockBellows extends Block{
 		}
 		return InteractionResult.PASS;
 	}
-	
+
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource pRandom) {
 		if(state.getValue(PUSH)) {
 			worldIn.setBlockAndUpdate(pos, state.setValue(PUSH, false));
 		}else {

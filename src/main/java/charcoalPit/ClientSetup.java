@@ -8,6 +8,7 @@ import charcoalPit.entity.AirplaneModel;
 import charcoalPit.entity.AirplaneRenderer;
 import charcoalPit.entity.ModEntities;
 import charcoalPit.gui.*;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
@@ -22,8 +23,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.RenderTypeHelper;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -142,7 +144,7 @@ public class ClientSetup {
 		});
 	}
 	@SubscribeEvent
-	public static void registerColors(ColorHandlerEvent.Item event){
+	public static void registerColors(RegisterColorHandlersEvent.Item event){
 		event.getItemColors().register(new ItemColor() {
 			@Override
 			public int getColor(ItemStack p_getColor_1_, int p_getColor_2_) {
@@ -218,7 +220,7 @@ public class ClientSetup {
 	}
 	
 	@SubscribeEvent
-	public static void registerBlockColors(ColorHandlerEvent.Block event){
+	public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
 		event.getBlockColors().register(new BlockColor() {
 			@Override
 			public int getColor(BlockState p_getColor_1_, @Nullable BlockAndTintGetter p_getColor_2_, @Nullable BlockPos p_getColor_3_, int p_getColor_4_) {

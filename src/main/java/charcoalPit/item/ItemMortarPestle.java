@@ -11,14 +11,14 @@ public class ItemMortarPestle extends Item {
 	}
 	
 	@Override
-	public ItemStack getContainerItem(ItemStack itemStack) {
+	public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
 		ItemStack stack=new ItemStack(this,1);
 		stack.setDamageValue(itemStack.getDamageValue()+1);
 		return stack;
 	}
 	
 	@Override
-	public boolean hasContainerItem(ItemStack stack) {
+	public boolean hasCraftingRemainingItem(ItemStack stack) {
 		return stack.getDamageValue()<63;
 	}
 }

@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -93,7 +92,7 @@ public class BlockBlastFurnace extends HorizontalDirectionalBlock implements Ent
 	@Override
 	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
 		if(!pLevel.isClientSide){
-			NetworkHooks.openGui((ServerPlayer)pPlayer, new MenuProvider() {
+			NetworkHooks.openScreen((ServerPlayer)pPlayer, new MenuProvider() {
 				
 				@Override
 				public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
@@ -102,7 +101,7 @@ public class BlockBlastFurnace extends HorizontalDirectionalBlock implements Ent
 				
 				@Override
 				public Component getDisplayName() {
-					return new TranslatableComponent("screen.charcoal_pit.blast_furnace");
+					return Component.translatable("screen.charcoal_pit.blast_furnace");
 				}
 			}, pPos);;
 		}

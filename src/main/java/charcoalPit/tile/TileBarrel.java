@@ -21,14 +21,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraftforge.common.SoundAction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -46,7 +47,7 @@ public class TileBarrel extends BlockEntity{
 	
 	public TileBarrel(BlockPos pos, BlockState state) {
 		super(ModTileRegistry.Barrel,pos,state);
-		tank=new FluidTank(16000, f->f.getFluid().getAttributes().getTemperature()<450 && !f.getFluid().getAttributes().isGaseous()) {
+		tank=new FluidTank(16000, f->f.getFluid().getFluidType().getTemperature()<450 && !f.getFluid().getFluidType().isLighterThanAir()) {
 			@Override
 			protected void onContentsChanged() {
 				setChanged();
@@ -114,7 +115,7 @@ public class TileBarrel extends BlockEntity{
 						tank.setFluid(FluidStack.EMPTY);
 						tank.fill(new FluidStack(recipe.fluid_out.getFluid(), rounds*recipe.fluid_out.amount, recipe.fluid_out.nbt), FluidAction.EXECUTE);
 					}
-					ItemStack container=input.getStackInSlot(0).getContainerItem().copy();
+					ItemStack container=input.getStackInSlot(0).copy();
 					container.setCount(rounds*recipe.in_amount);
 					input.extractItem(0, rounds*recipe.in_amount, false);
 					container=input.insertItem(0,container,false);
@@ -275,7 +276,7 @@ public class TileBarrel extends BlockEntity{
                     
                     if (doDrain && player != null)
                     {
-                        SoundEvent soundevent = transfer.getFluid().getAttributes().getEmptySound(transfer);
+                        SoundEvent soundevent = transfer.getFluid().getFluidType().getSound(transfer, SoundAction.get("empty"));
                         player.level.playSound(null, player.getX(), player.getY() + 0.5, player.getZ(), soundevent, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
 
@@ -297,7 +298,7 @@ public class TileBarrel extends BlockEntity{
                             FluidUtil.tryFluidTransfer(containerFluidHandler, fluidSource, maxAmount, true);
                             if (player != null)
                             {
-                                SoundEvent soundevent = simulatedTransfer.getFluid().getAttributes().getFillSound(simulatedTransfer);
+                                SoundEvent soundevent = simulatedTransfer.getFluid().getFluidType().getSound(simulatedTransfer, SoundAction.get("fill"));
                                 player.level.playSound(null, player.getX(), player.getY() + 0.5, player.getZ(), soundevent, SoundSource.BLOCKS, 1.0F, 1.0F);
                             }
                         }
@@ -328,7 +329,7 @@ public class TileBarrel extends BlockEntity{
 		
 		@Override
 		public boolean isItemValid(int slot, ItemStack stack) {
-			return stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null).isPresent()||
+			return stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM, null).isPresent()||
 					BarrelRecipe.isValidItem(stack, getLevel())||stack.getItem()==Items.GLASS_BOTTLE;
 		}
 		

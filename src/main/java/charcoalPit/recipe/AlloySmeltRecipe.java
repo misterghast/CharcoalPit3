@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 public class AlloySmeltRecipe extends AbstractCookingRecipe {
@@ -58,7 +58,7 @@ public class AlloySmeltRecipe extends AbstractCookingRecipe {
 		}
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<AlloySmeltRecipe>{
+	public static class Serializer implements RecipeSerializer<AlloySmeltRecipe>{
 		
 		@Override
 		public AlloySmeltRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {

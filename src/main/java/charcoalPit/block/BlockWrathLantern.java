@@ -4,7 +4,7 @@ import charcoalPit.tile.TileWrathLantern;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
@@ -24,8 +24,8 @@ public class BlockWrathLantern extends LanternBlock implements EntityBlock {
 	@Override
 	public void appendHoverText(ItemStack pStack, @Nullable BlockGetter pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
 		super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-		pTooltip.add(new TextComponent("EvE kills count as PvE").withStyle(ChatFormatting.DARK_RED));
-		pTooltip.add(new TextComponent("Area: 9x9x9").withStyle(ChatFormatting.DARK_GRAY));
+		pTooltip.add(Component.literal("EvE kills count as PvE").withStyle(ChatFormatting.DARK_RED));
+		pTooltip.add(Component.literal("Area: 9x9x9").withStyle(ChatFormatting.DARK_GRAY));
 	}
 	
 	@Nullable

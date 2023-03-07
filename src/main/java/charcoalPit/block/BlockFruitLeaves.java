@@ -4,6 +4,7 @@ import charcoalPit.core.MethodHelper;
 import charcoalPit.core.ModBlockRegistry;
 import charcoalPit.core.ModItemRegistry;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -91,7 +92,7 @@ public class BlockFruitLeaves extends Block {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (!state.getValue(PERSISTENT) && state.getValue(DISTANCE) == 7) {
 			dropResources(state, worldIn, pos);
 			worldIn.removeBlock(pos, false);

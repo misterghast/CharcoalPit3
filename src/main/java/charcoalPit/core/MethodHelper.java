@@ -10,7 +10,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+
 import net.minecraft.tags.*;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
@@ -25,6 +25,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.data.ForgeItemTagsProvider;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandler;
@@ -111,14 +112,15 @@ public class MethodHelper {
 	
 	public static void renderFluid(AbstractContainerScreen<?> screen, Minecraft mc, PoseStack pMatrixStack, FluidStack fluid, int capacity, int x, int y, final int tank_height, int i, int j){
 		y++;
+		IClientFluidTypeExtensions extensions = IClientFluidTypeExtensions.of(fluid.getFluid());
 		if(fluid.isEmpty())
 			return;
-		if(fluid.getFluid().getAttributes().isGaseous())
+		if(fluid.getFluid().getFluidType().isLighterThanAir())
 			capacity=capacity*64;
 		int height= Math.max(1,(fluid.getAmount()*tank_height)/capacity);
 		RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-		TextureAtlasSprite sprite= mc.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getFluid().getAttributes().getStillTexture());
-		int c=fluid.getFluid().getAttributes().getColor(fluid);
+		TextureAtlasSprite sprite= mc.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(extensions.getStillTexture());
+		int c= extensions.getTintColor();
 		RenderSystem.setShaderColor((c>>16&255)/255.0F, (c>>8&255)/255.0F, (c&255)/255.0F, 1F/*(c>>24&255)/255f*/);
 		while(height>=16){
 			innerBlit(pMatrixStack.last().pose(),i+x,i+x+16,j+y-height,j+y+16-height,screen.getBlitOffset(),sprite.getU0(), sprite.getU1(), sprite.getV0(), sprite.getV1());
@@ -139,7 +141,6 @@ public class MethodHelper {
 		bufferbuilder.vertex(pMatrix, (float)pX2, (float)pY1, (float)pBlitOffset).uv(pMaxU, pMinV).endVertex();
 		bufferbuilder.vertex(pMatrix, (float)pX1, (float)pY1, (float)pBlitOffset).uv(pMinU, pMinV).endVertex();
 		bufferbuilder.end();
-		BufferUploader.end(bufferbuilder);
 	}
 	
 	public static void drawFluidTooltip(AbstractContainerScreen<?> screen,FluidStack stack,int cap,int mousex,int mousey, int x1,int y1,int x2,int y2,PoseStack matrix,Component emptyName){
@@ -149,7 +150,7 @@ public class MethodHelper {
 				list.add(stack.getDisplayName());
 			else
 				list.add(emptyName);
-			list.add(new TextComponent(stack.getAmount() + "/" + cap + " mB"));
+			list.add(Component.literal(stack.getAmount() + "/" + cap + " mB"));
 			Optional<TooltipComponent> tooltipComponent = Optional.empty();
 			screen.renderTooltip(matrix, list, tooltipComponent, mousex, mousey, ItemStack.EMPTY);
 		}

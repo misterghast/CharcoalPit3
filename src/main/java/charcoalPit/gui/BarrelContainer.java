@@ -15,8 +15,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -44,7 +44,7 @@ public class BarrelContainer extends AbstractContainerMenu{
 		this.addSlot(new SlotItemHandler(tile.input, 0, 98, 17) {
 			@Override
 			public boolean mayPlace(ItemStack stack) {
-				return stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()||
+				return stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()||
 						BarrelRecipe.isValidItem(stack, tile.getLevel())||stack.getItem()==Items.GLASS_BOTTLE;
 			}
 			

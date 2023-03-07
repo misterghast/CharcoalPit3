@@ -2,11 +2,13 @@ package charcoalPit.core;
 
 import charcoalPit.CharcoalPit;
 import charcoalPit.tile.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 //@EventBusSubscriber(modid=CharcoalPit.MODID, bus=Bus.MOD)
 public class ModTileRegistry {
@@ -33,12 +35,31 @@ public class ModTileRegistry {
 	
 	
 	//@SubscribeEvent
-	public static void registerTileEntity(RegistryEvent.Register<BlockEntityType<?>> event) {
-		event.getRegistry().registerAll(ActivePile.setRegistryName("active_pile"),CreosoteCollector.setRegistryName("creosote_collector"),
+	public static void registerTileEntity(RegisterEvent event) {
+		event.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, helper -> {
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "active_pile"), ActivePile);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "creosote_collector"), CreosoteCollector);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "ceramic_pot"),
+					CeramicPot);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "barrel"),  Barrel);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "feeding_through"), FeedingThrough);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "nest_box"),
+					NestBox);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "bloomeryy"), Bloomeryy);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "bloom"), Bloom);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "blast_furnace"),
+					BlastFurnace);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "distillery"), Distillery);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "steam_press"), SteamPress);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "wrath_lantern"),
+					WrathLantern);
+
+		});
+		/*event.getRegistry().registerAll(ActivePile.setRegistryName("active_pile"),CreosoteCollector.setRegistryName("creosote_collector"),
 				CeramicPot.setRegistryName("ceramic_pot"), Barrel.setRegistryName("barrel"),FeedingThrough.setRegistryName("feeding_through"),
 				NestBox.setRegistryName("nest_box"),Bloomeryy.setRegistryName("bloomeryy"),Bloom.setRegistryName("bloom"),
 				BlastFurnace.setRegistryName("blast_furnace"),Distillery.setRegistryName("distillery"),SteamPress.setRegistryName("steam_press"),
-				WrathLantern.setRegistryName("wrath_lantern"));
+				WrathLantern.setRegistryName("wrath_lantern"));*/
 	}
 	
 }

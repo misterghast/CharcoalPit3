@@ -1,6 +1,7 @@
 package charcoalPit.block;
 
 import charcoalPit.core.MethodHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -57,24 +58,24 @@ public class BlockCocoPod extends HorizontalDirectionalBlock implements Bonemeal
 	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return state.getValue(AGE)<2;
 	}
-	
+
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
-		return true;
+	public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+		return false;
 	}
-	
+
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
-		worldIn.setBlock(pos,state.setValue(AGE,state.getValue(AGE)+1),2);
+	public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+
 	}
-	
+
 	@Override
 	public boolean isRandomlyTicking(BlockState state) {
 		return true;
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (random.nextFloat()<0.166F) {
 			int i = state.getValue(AGE);
 			if (i < 2 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, worldIn.random.nextInt(5) == 0)) {
