@@ -28,7 +28,7 @@ import net.minecraftforge.items.ItemStackHandler;
 public class OreKilnRecipe implements Recipe<Container>{
 	
 	public static final ResourceLocation OREKILN=new ResourceLocation(CharcoalPit.MODID, "orekiln");
-	public static final RecipeType<OreKilnRecipe> ORE_KILN_RECIPE=RecipeType.register(OREKILN.toString());
+	public static final RecipeType<OreKilnRecipe> ORE_KILN_RECIPE=RecipeType.simple(OREKILN);
 	
 	public static final Serializer SERIALIZER=new Serializer();
 

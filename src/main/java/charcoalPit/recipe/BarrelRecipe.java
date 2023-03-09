@@ -24,7 +24,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class BarrelRecipe implements Recipe<Container>{
 	
 	public static final ResourceLocation BARREL=new ResourceLocation(CharcoalPit.MODID, "barrel");
-	public static final RecipeType<BarrelRecipe> BARREL_RECIPE=RecipeType.register(BARREL.toString());
+	public static final RecipeType<BarrelRecipe> BARREL_RECIPE=RecipeType.simple(BARREL);
 	
 	public static final Serializer SERIALIZER=new Serializer();
 	

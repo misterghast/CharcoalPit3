@@ -2,14 +2,18 @@ package charcoalPit.core;
 
 import charcoalPit.CharcoalPit;
 import charcoalPit.block.BlockCeramicPot;
+import charcoalPit.block.BlockPotteryKiln;
 import charcoalPit.entity.Airplane;
 import charcoalPit.item.tool.ModTiers;
+import charcoalPit.recipe.PotteryKilnRecipe;
 import charcoalPit.recipe.SquisherRecipe;
+import charcoalPit.tile.TilePotteryKiln;
 import charcoalPit.tile.TileWrathLantern;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -79,6 +83,21 @@ public class PileIgnitr {
 				}else if(event.getLevel().getBlockState(pos).getBlock()==Blocks.COAL_BLOCK){
 					//found coal pile to ignite
 					igniteCoal(event.getLevel(),pos);
+				} else if(event.getLevel().getBlockState(pos).getBlock()==ModBlockRegistry.Kiln){
+				//found coal pile to ignite
+					ignitePottery(event.getLevel(),pos);
+			}
+		}
+		}
+	}
+	public static void ignitePottery(LevelAccessor world, BlockPos pos) {
+		if(world.getBlockState(pos).getBlock()==ModBlockRegistry.Kiln&&
+				world.getBlockState(pos).getValue(BlockPotteryKiln.TYPE)== BlockPotteryKiln.EnumKilnTypes.WOOD) {
+			world.setBlock(pos, ModBlockRegistry.Kiln.defaultBlockState().setValue(BlockPotteryKiln.TYPE, BlockPotteryKiln.EnumKilnTypes.ACTIVE), 3);
+			((TilePotteryKiln)world.getBlockEntity(pos)).setActive(true);
+			for(int x=-1;x<=1;x++) {
+				for(int z=-1;z<=1;z++) {
+					ignitePottery(world, new BlockPos(pos.getX()+x, pos.getY(), pos.getZ()+z));
 				}
 			}
 		}
@@ -116,7 +135,22 @@ public class PileIgnitr {
 				event.setUseItem(Result.DENY);
 			}
 		}
+
+		if(!event.isCanceled()&&event.getEntity().isCrouching()&& PotteryKilnRecipe.isValidInput(event.getItemStack(), event.getLevel())&&
+				event.getFace()==Direction.UP&&event.getLevel().getBlockState(event.getPos()).isFaceSturdy(event.getLevel(), event.getPos(), Direction.UP)&&
+				event.getLevel().getBlockState(event.getPos().relative(Direction.UP)).getMaterial().isReplaceable()) {
+			if(!event.getLevel().isClientSide()) {
+				event.getLevel().setBlockAndUpdate(event.getPos().relative(Direction.UP), ModBlockRegistry.Kiln.defaultBlockState());
+				TilePotteryKiln tile=((TilePotteryKiln)event.getLevel().getBlockEntity(event.getPos().relative((Direction.UP))));
+				event.getEntity().setItemInHand(event.getHand(), tile.pottery.insertItem(0, event.getItemStack(), false));
+				tile.setChanged();
+				event.getLevel().playSound(null, event.getPos(), SoundType.GRAVEL.getPlaceSound(), SoundSource.BLOCKS, 1F, 1F);
+			}
+			event.setUseBlock(Result.DENY);
+			event.setUseItem(Result.DENY);
+		}
 	}
+
 	@SubscribeEvent
 	public static void addLoot(LootTableLoadEvent event) {
 		if(event.getName().toString().equals("minecraft:chests/end_city_treasure")){
@@ -156,12 +190,12 @@ public class PileIgnitr {
 	public static void furnaceFuel(FurnaceFuelBurnTimeEvent event) {
 		if(event.getItemStack().getItem()==ModItemRegistry.CreosoteBucket)
 			event.setBurnTime(4800);
-		if(event.getItemStack().getItem()==ModItemRegistry.BioDieselBucket)
-			event.setBurnTime(25600);
+		//if(event.getItemStack().getItem()==ModItemRegistry.BioDieselBucket)
+			//event.setBurnTime(25600);
 		if(event.getItemStack().getItem()==ModItemRegistry.CharcoalBlock)
 			event.setBurnTime(16000);
-		if(event.getItemStack().getItem()==ModItemRegistry.EthanolBucket)
-			event.setBurnTime(15200);
+		//if(event.getItemStack().getItem()==ModItemRegistry.EthanolBucket)
+			//event.setBurnTime(15200);
 	}
 	
 	@SubscribeEvent

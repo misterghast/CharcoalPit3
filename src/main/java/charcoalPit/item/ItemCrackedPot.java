@@ -43,6 +43,7 @@ public class ItemCrackedPot extends Item{
 		}else {
 			if(context.getItemInHand().hasTag()&&context.getItemInHand().getTag().contains("inventory")) {
 				ItemStackHandler inv=new ItemStackHandler();
+				System.out.println(context.getItemInHand().getTag());
 				inv.deserializeNBT(context.getItemInHand().getTag().getCompound("inventory"));
 				ItemHandlerHelper.giveItemToPlayer(context.getPlayer(),inv.getStackInSlot(0));
 			}

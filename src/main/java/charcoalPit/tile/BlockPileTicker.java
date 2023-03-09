@@ -36,7 +36,7 @@ public class BlockPileTicker implements BlockEntityTicker<TileActivePile> {
             }else{
                 if(itemsLeft>0){
                     itemsLeft--;
-                    creosote.fill(new FluidStack(ModFluidRegistry.CreosoteStill, isCoke? Config.CokeCreosote.get():Config.CharcoalCreosote.get()), IFluidHandler.FluidAction.EXECUTE);
+                    //creosote.fill(new FluidStack(ModFluidRegistry.CreosoteStill, isCoke? Config.CokeCreosote.get():Config.CharcoalCreosote.get()), IFluidHandler.FluidAction.EXECUTE);
                     burnTime=isCoke?Config.CokeTime.get()/10:Config.CharcoalTime.get()/10;
                 }else{
                     worldIn.setBlockAndUpdate(pos, isCoke? ModBlockRegistry.CoalAsh.defaultBlockState():ModBlockRegistry.WoodAsh.defaultBlockState());

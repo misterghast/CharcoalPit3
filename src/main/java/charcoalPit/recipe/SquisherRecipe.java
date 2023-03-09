@@ -19,7 +19,7 @@ import java.util.List;
 public class SquisherRecipe implements Recipe<Container> {
 	
 	public static final ResourceLocation SQUISH=new ResourceLocation(CharcoalPit.MODID, "squish");
-	public static final RecipeType<SquisherRecipe> SQUISH_RECIPE=RecipeType.register(SQUISH.toString());
+	public static final RecipeType<SquisherRecipe> SQUISH_RECIPE=RecipeType.simple(SQUISH);
 	
 	public static final Serializer SERIALIZER=new Serializer();
 	

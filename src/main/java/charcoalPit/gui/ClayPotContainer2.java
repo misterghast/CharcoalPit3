@@ -4,6 +4,7 @@ import charcoalPit.CharcoalPit;
 import charcoalPit.core.ModContainerRegistry;
 import charcoalPit.recipe.OreKilnRecipe;
 import net.minecraft.client.Minecraft;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.data.ForgeItemTagsProvider;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -116,8 +118,7 @@ public class ClayPotContainer2 extends AbstractContainerMenu{
 		@Override
 		public boolean isItemValid(int slot, ItemStack stack) {
 			if(slot==0) {
-				return false;
-				//return stack.is(ItemTags.getAllTags().getTag(new ResourceLocation(CharcoalPit.MODID, "orekiln_fuels")));
+				return stack.is(ItemTags.create(new ResourceLocation(CharcoalPit.MODID, "orekiln_fuels")));
 			}else {
 				return OreKilnRecipe.isValidInput(stack, world);
 			}

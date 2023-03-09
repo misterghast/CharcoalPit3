@@ -11,30 +11,31 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fluids.ForgeFlowingFluid.Properties;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 import java.util.function.BiFunction;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
-@EventBusSubscriber(modid=CharcoalPit.MODID, bus=Bus.MOD)
 public class ModFluidRegistry {
 	
-	public static final ResourceLocation creosote_still=new ResourceLocation(CharcoalPit.MODID, "block/creosote_still"),
-			creosote_flowing=new ResourceLocation(CharcoalPit.MODID, "block/creosote_flow");
-	public static ForgeFlowingFluid CreosoteStill, CreosoteFlowing;
-	public static ForgeFlowingFluid.Properties Creosote;
+	/*public static final ResourceLocation creosote_still=new ResourceLocation(CharcoalPit.MODID, "block/creosote_still"),
+			creosote_flowing=new ResourceLocation(CharcoalPit.MODID, "block/creosote_flow");*/
+	public static ForgeFlowingFluid CreosoteFlowing;
+    public static ForgeFlowingFluid CreosoteStill;
+    public static ForgeFlowingFluid.Properties Creosote = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> CreosoteStill, () -> CreosoteFlowing);
+
+
 	
 	public static final ResourceLocation alcohol_still=new ResourceLocation("minecraft:block/water_still"),
 			alcohol_flowing=new ResourceLocation("minecraft:block/water_flow");
-	public static ForgeFlowingFluid AlcoholStill, AlcoholFlowing;
-	public static ForgeFlowingFluid.Properties Alcohol;
-
-	public static final ResourceLocation vinegar_still=new ResourceLocation("minecraft:block/water_still"),
+	public static ForgeFlowingFluid AlcoholStill;
+	public static ForgeFlowingFluid AlcoholFlowing;
+    public static ForgeFlowingFluid.Properties Alcohol = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> AlcoholStill, () -> AlcoholFlowing);
+	/*public static final ResourceLocation vinegar_still=new ResourceLocation("minecraft:block/water_still"),
 			vinegar_flowing=new ResourceLocation("minecraft:block/water_flow");
 	public static ForgeFlowingFluid VinegarStill, VinegarFlowing;
 	public static ForgeFlowingFluid.Properties Vinegar;
@@ -62,14 +63,20 @@ public class ModFluidRegistry {
 	
 	public static ForgeFlowingFluid SeedOilStill;
 	public static ForgeFlowingFluid.Properties SeedOil;
-	
+	*/
 	@SubscribeEvent
 	public static void registerFluids(RegisterEvent event) {
 		event.register(ForgeRegistries.Keys.FLUIDS, helper -> {
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "creosote_still"), CreosoteStill);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "creosote_flowing"),
-					CreosoteFlowing);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "alcohol_still"),
+            helper.register(new ResourceLocation(CharcoalPit.MODID, "creosote_still"), CreosoteStill);
+            helper.register(new ResourceLocation(CharcoalPit.MODID, "creosote_flowing"),
+                    CreosoteFlowing);
+            helper.register(new ResourceLocation(CharcoalPit.MODID, "alcohol_still"),
+                    AlcoholStill);
+            helper.register(new ResourceLocation(CharcoalPit.MODID, "alcohol_flowing"),
+                    AlcoholFlowing);
+        });
+    }
+			/*helper.register(new ResourceLocation(CharcoalPit.MODID, "alcohol_still"),
 					AlcoholStill);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "alcohol_flowing"),
 					AlcoholFlowing);
@@ -97,7 +104,7 @@ public class ModFluidRegistry {
 		});
 
 
-	}
+	}*/
 
 	/*public static class AlcoholProperties extends FluidAtt{
 		AlcoholProperties(Builder builder, Fluid fluid){super(builder, fluid);}

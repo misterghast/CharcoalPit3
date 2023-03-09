@@ -24,7 +24,7 @@ public class TileCeramicPot extends BlockEntity{
 	public LazyOptional<IItemHandler> out;
 	
 	public TileCeramicPot(BlockPos pos, BlockState state) {
-		super(ModTileRegistry.CeramicPot,pos,state);
+		super(ModTileRegistry.CeramicPot, pos,state);
 		inventory=new CeramicPotHandler(9,()->{
 			setChanged();
 		});

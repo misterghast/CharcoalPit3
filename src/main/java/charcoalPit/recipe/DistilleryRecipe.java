@@ -21,7 +21,7 @@ import java.util.List;
 public class DistilleryRecipe implements Recipe<Container> {
 	
 	public static final ResourceLocation DISTILLERY=new ResourceLocation(CharcoalPit.MODID, "distill");
-	public static final RecipeType<DistilleryRecipe> DISTILLERY_RECIPE=RecipeType.register(DISTILLERY.toString());
+	public static final RecipeType<DistilleryRecipe> DISTILLERY_RECIPE=RecipeType.simple(DISTILLERY);
 	
 	public static final Serializer SERIALIZER=new Serializer();
 	

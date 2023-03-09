@@ -57,12 +57,12 @@ public class ModFeatures {
 	//public static TrunkPlacerType<BentTrunkPlacer> BENT_PLACER=new TrunkPlacerType<BentTrunkPlacer>(BentTrunkPlacer.CODEC);
 	public static TrunkPlacerType<DoubleTrunkPlacer> DOUBLE_PLACER=new TrunkPlacerType<>(DoubleTrunkPlacer.CODEC);
 	
-	public static Holder<ConfiguredFeature<?, ?>> APPLE;
+	/*public static Holder<ConfiguredFeature<?, ?>> APPLE;
 	public static Holder<ConfiguredFeature<?, ?>> CHERRY;
 	public static Holder<ConfiguredFeature<?, ?>> DRAGON;
 	public static Holder<ConfiguredFeature<?, ?>> CHESTNUT;
 	public static Holder<ConfiguredFeature<?, ?>> OLIVE;
-	public static Holder<ConfiguredFeature<?, ?>> ORANGE;
+	public static Holder<ConfiguredFeature<?, ?>> ORANGE;*/
 	
 	@SubscribeEvent
 	public static void registerPlacers(RegisterEvent event){
@@ -88,13 +88,13 @@ public class ModFeatures {
 		OLIVE= FeatureUtils.register("charcoal_pit:olive",Feature.TREE,(new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.ACACIA_LOG.defaultBlockState()), new StraightTrunkPlacer(3, 0, 0), new SimpleStateProvider2(ModBlockRegistry.OliveLeaves.defaultBlockState()), new OliveFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build());
 		ORANGE= FeatureUtils.register("charcoal_pit:orange",Feature.TREE,(new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.JUNGLE_LOG.defaultBlockState()),new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider2(ModBlockRegistry.OrangeLeaves.defaultBlockState()), new OrangeFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build());
 		*/
-		APPLE = BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(CharcoalPit.MODID,"apple"), new ConfiguredFeature<>(Feature.TREE,((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.OAK_LOG.defaultBlockState()),new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider2(ModBlockRegistry.AppleLeaves.defaultBlockState()), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build())));
+		/*APPLE = BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(CharcoalPit.MODID,"apple"), new ConfiguredFeature<>(Feature.TREE,((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.OAK_LOG.defaultBlockState()),new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider2(ModBlockRegistry.AppleLeaves.defaultBlockState()), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build())));
 		CHERRY = BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(CharcoalPit.MODID,"cherry"), new ConfiguredFeature<>(Feature.TREE,((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.BIRCH_LOG.defaultBlockState()), new StraightTrunkPlacer(5, 2, 0), new SimpleStateProvider2(ModBlockRegistry.CherryLeaves.defaultBlockState()), new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build())));
 		DRAGON = BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(CharcoalPit.MODID,"dragon"), new ConfiguredFeature<>(Feature.TREE,((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.ACACIA_LOG.defaultBlockState()), new StraightTrunkPlacer(3, 0, 0), new SimpleStateProvider2(ModBlockRegistry.DragonLeaves.defaultBlockState()), new DragonFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build())));
 		CHESTNUT=BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(CharcoalPit.MODID, "chestnut"),new ConfiguredFeature<>(Feature.TREE,((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.DARK_OAK_LOG.defaultBlockState()), new DoubleTrunkPlacer(5,2,0), new SimpleStateProvider2(ModBlockRegistry.ChestnutLeaves.defaultBlockState()), new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)), new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))).ignoreVines().build())));
 		OLIVE=BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(CharcoalPit.MODID,"olive"), new ConfiguredFeature<>(Feature.TREE,((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.ACACIA_LOG.defaultBlockState()), new StraightTrunkPlacer(3, 0, 0), new SimpleStateProvider2(ModBlockRegistry.OliveLeaves.defaultBlockState()), new OliveFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build())));
 		ORANGE = BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(CharcoalPit.MODID,"orange"), new ConfiguredFeature<>(Feature.TREE,((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider2(Blocks.JUNGLE_LOG.defaultBlockState()),new StraightTrunkPlacer(4, 2, 0), new SimpleStateProvider2(ModBlockRegistry.OrangeLeaves.defaultBlockState()), new OrangeFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build())));
-		
+		*/
 		ModBlockRegistry.AppleLeaves.fruit= Items.APPLE;
 		ModBlockRegistry.CherryLeaves.fruit=ModItemRegistry.Cherry;
 		ModBlockRegistry.DragonLeaves.fruit=ModItemRegistry.DragonFruit;
@@ -103,7 +103,7 @@ public class ModFeatures {
 		ModBlockRegistry.OrangeLeaves.fruit=ModItemRegistry.Orange;
 	}
 	
-	public static class AppleTree extends AbstractTreeGrower{
+	/*public static class AppleTree extends AbstractTreeGrower{
 		
 		@Nullable
 		@Override
@@ -156,7 +156,7 @@ public class ModFeatures {
 		protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource rand) {
 			return CHESTNUT;
 		}
-	}
+	}*/
 	
 	public static class SimpleStateProvider2 extends SimpleStateProvider{
 		

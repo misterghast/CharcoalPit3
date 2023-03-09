@@ -35,7 +35,7 @@ public class ItemClayPot extends Item{
 	@Override
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, worldIn, tooltip, flagIn);
-		/*if(stack.hasTag()&&stack.getTag().contains("inventory")) {
+		if(stack.hasTag()&&stack.getTag().contains("inventory")) {
 			ItemStackHandler inv=new ItemStackHandler();
 			inv.deserializeNBT(stack.getTag().getCompound("inventory"));
 			if(OreKilnRecipe.oreKilnIsEmpty(inv)) {
@@ -50,7 +50,7 @@ public class ItemClayPot extends Item{
 					tooltip.add(tx);
 				}
 			}
-		}*/
+		}
 		if(stack.hasTag()&&stack.getTag().contains("result")){
 			if(stack.getTag().getBoolean("empty")){
 				tooltip.add(Component.literal("Empty"));

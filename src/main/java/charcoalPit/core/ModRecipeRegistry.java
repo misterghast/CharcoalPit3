@@ -21,7 +21,19 @@ public class ModRecipeRegistry {
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "squish"),
 					SquisherRecipe.SERIALIZER);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "alloy"), AlloySmeltRecipe.SERIALIZER);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "campfire_alloy"), CampfireSmeltRecipe.SERIALIZER);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "distill"), DistilleryRecipe.SERIALIZER);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "pottery"), PotteryKilnRecipe.SERIALIZER);
+		});
+
+		event.register(ForgeRegistries.Keys.RECIPE_TYPES, helper -> {
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "orekiln"), OreKilnRecipe.ORE_KILN_RECIPE);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "barrel"),  BarrelRecipe.BARREL_RECIPE);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "squish"),
+					SquisherRecipe.SQUISH_RECIPE);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "alloy"), AlloySmeltRecipe.);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "distill"), DistilleryRecipe.DISTILLERY_RECIPE);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "pottery"), PotteryKilnRecipe.POTTERY_RECIPE);
 		});
 
 		/*event.getRegistry().registerAll(OreKilnRecipe.SERIALIZER.setRegistryName("orekiln"), BarrelRecipe.SERIALIZER.setRegistryName("barrel"),

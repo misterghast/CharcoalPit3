@@ -52,7 +52,7 @@ public class ModBlockRegistry {
 	public static BlockActivePile ActiveCoalPile=new BlockActivePile(true, Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(5F, 6F).requiresCorrectToolForDrops());
 	public static BlockCreosoteCollector BrickCollector=new BlockCreosoteCollector(Properties.copy(Blocks.BRICKS)), SandyCollector=new BlockCreosoteCollector(Properties.copy(SandyBrick)),
 			NetherCollector=new BlockCreosoteCollector(Properties.copy(Blocks.NETHER_BRICKS)),EndCollector=new BlockCreosoteCollector(Properties.copy(Blocks.END_STONE_BRICKS));
-	public static BlockCeramicPot CeramicPot=new BlockCeramicPot(MaterialColor.COLOR_ORANGE),WhitePot=new BlockCeramicPot(MaterialColor.TERRACOTTA_WHITE),
+	public static BlockCeramicPot CeramicPot=new BlockCeramicPot(MaterialColor.COLOR_ORANGE);/*,WhitePot=new BlockCeramicPot(MaterialColor.TERRACOTTA_WHITE),
 			OrangePot=new BlockCeramicPot(MaterialColor.TERRACOTTA_ORANGE),MagentaPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_MAGENTA),
 			LightBluePot=new BlockCeramicPot(MaterialColor.TERRACOTTA_LIGHT_BLUE),YellowPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_YELLOW),
 			LimePot=new BlockCeramicPot(MaterialColor.TERRACOTTA_LIGHT_GREEN),PinkPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_PINK),
@@ -60,7 +60,7 @@ public class ModBlockRegistry {
 			CyanPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_CYAN),PurplePot=new BlockCeramicPot(MaterialColor.TERRACOTTA_PURPLE),
 			BluePot=new BlockCeramicPot(MaterialColor.TERRACOTTA_BLUE),BrownPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_BROWN),
 			GreenPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_GREEN),RedPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_RED),
-			BlackPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_BLACK);
+			BlackPot=new BlockCeramicPot(MaterialColor.TERRACOTTA_BLACK);*/
 	public static BlockBellows Bellows=new BlockBellows();
 	
 	public static BlockBarrel Barrel=new BlockBarrel();
@@ -70,12 +70,12 @@ public class ModBlockRegistry {
 	public static BlockCorn Corn=new BlockCorn(Properties.copy(Blocks.WHEAT));
 	public static BlockSunflowerCrop Sunflower=new BlockSunflowerCrop(Properties.copy(Blocks.WHEAT));
 	
-	public static SaplingBlock AppleSapling=new SaplingBlock(new ModFeatures.AppleTree(),BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
+	/*public static SaplingBlock AppleSapling=new SaplingBlock(new ModFeatures.AppleTree(),BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
 	public static SaplingBlock CherrySapling=new SaplingBlock(new ModFeatures.CherryTree(), BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS));
 	public static SaplingBlock DragonSapling=new SaplingBlock(new ModFeatures.DragonTree(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));
 	public static SaplingBlock ChestnutSapling=new SaplingBlock(new ModFeatures.ChestnutTree(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));
 	public static SaplingBlock OliveSapling=new SaplingBlock(new ModFeatures.OliveTree(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));
-	public static SaplingBlock OrangeSapling=new SaplingBlock(new ModFeatures.OrangeTree(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));
+	public static SaplingBlock OrangeSapling=new SaplingBlock(new ModFeatures.OrangeTree(),BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING));*/
 	
 	public static BlockFruitLeaves AppleLeaves=new BlockFruitLeaves(Properties.copy(Blocks.OAK_LEAVES), null, 0.166F);
 	public static BlockFruitLeaves CherryLeaves=new BlockFruitLeaves(Properties.copy(Blocks.BIRCH_LEAVES), null, 0.333F);
@@ -91,11 +91,11 @@ public class ModBlockRegistry {
 	
 	public static BlockFeedingThrough FeedingThrough =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
 	public static BlockFeedingThrough FeedingThroughBirch =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
-	public static BlockFeedingThrough FeedingThroughJungle =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
+	//public static BlockFeedingThrough FeedingThroughJungle =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
 	public static BlockFeedingThrough FeedingThroughSpruce =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
-	public static BlockFeedingThrough FeedingThroughDark =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
+	//public static BlockFeedingThrough FeedingThroughDark =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
 	public static BlockFeedingThrough FeedingThroughAcacia =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
-	public static BlockFeedingThrough FeedingThroughCrimson =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
+	//public static BlockFeedingThrough FeedingThroughCrimson =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
 	public static BlockFeedingThrough FeedingThroughWarped =new BlockFeedingThrough(Properties.copy(Blocks.OAK_PLANKS));
 	
 	public static BlockNestBox NestBox=new BlockNestBox(Properties.copy(Blocks.OAK_PLANKS));
@@ -117,6 +117,8 @@ public class ModBlockRegistry {
 	public static BlockSteamPress SteamPress=new BlockSteamPress(Properties.copy(Blocks.BLAST_FURNACE));
 	
 	public static BlockWrathLantern WrathLantern=new BlockWrathLantern(Properties.copy(Blocks.LANTERN));
+
+	public static BlockPotteryKiln Kiln = new BlockPotteryKiln();
 	
 	
 	/*public static DoorBlock BrickDoor=new DoorBlock(AbstractBlock.Properties.from(Blocks.IRON_DOOR)),
@@ -124,7 +126,7 @@ public class ModBlockRegistry {
 			NetherDoor=new DoorBlock(Properties.from(Blocks.IRON_DOOR)),
 			EndDoor=new DoorBlock(Properties.from(Blocks.IRON_DOOR));*/
 	
-	public static BlockCreosote Creosote=new BlockCreosote();
+	//public static BlockCreosote Creosote=new BlockCreosote();
 	
 	//@SubscribeEvent
 	public static void registerBlocks(RegisterEvent event) {
@@ -141,7 +143,7 @@ public class ModBlockRegistry {
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "sandy_slab"), SandySlab);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "sandy_stair"), SandyStair);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "sandy_wall"), SandyWall);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "creosote_oil"), Creosote);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "creosote_oil"), Creosote);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "brick_collector"), BrickCollector);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "sandy_collector"), SandyCollector);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "nether_collector"), NetherCollector);
@@ -152,19 +154,19 @@ public class ModBlockRegistry {
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "leeks"), Leeks);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "corn"), Corn);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "apple_leaves"), AppleLeaves);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "apple_sapling"), AppleSapling);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "cherry_sapling"), CherrySapling);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "apple_sapling"), AppleSapling);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "cherry_sapling"), CherrySapling);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "cherry_leaves"), CherryLeaves);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "dragon_sapling"), DragonSapling);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "dragon_sapling"), DragonSapling);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "dragon_leaves"), DragonLeaves);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "chestnut_sapling"), ChestnutSapling);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "chestnut_sapling"), ChestnutSapling);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "chestnut_leaves"), ChestnutLeaves);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "banana_pod"), BanananaPod);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "sunflower_crop"), Sunflower);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "coconut_pod"), CoconutPod);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "olive_sapling"), OliveSapling);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "olive_sapling"), OliveSapling);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "olive_leaves"), OliveLeaves);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "orange_sapling"), OrangeSapling);
+			//helper.register(new ResourceLocation(CharcoalPit.MODID, "orange_sapling"), OrangeSapling);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "orange_leaves"), OrangeLeaves);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "genie_light"), GenieLight);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "nest_box"), NestBox);
@@ -176,7 +178,7 @@ public class ModBlockRegistry {
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "steam_press"), SteamPress);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "wrath_lantern"), WrathLantern);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "ceramic_pot"), CeramicPot);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "yellow_pot"), YellowPot);
+			/*helper.register(new ResourceLocation(CharcoalPit.MODID, "yellow_pot"), YellowPot);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "white_pot"), WhitePot);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "purple_pot"), PurplePot);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "pink_pot"), PinkPot);
@@ -187,12 +189,13 @@ public class ModBlockRegistry {
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "gray_pot"), GrayPot);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "cyan_pot"), CyanPot);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "blue_pot"), BluePot);
-			helper.register(new ResourceLocation(CharcoalPit.MODID, "black_pot"), BlackPot);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "black_pot"), BlackPot);*/
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "feeding_through"), FeedingThrough);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "feeding_through_birch"), FeedingThroughBirch);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "feeding_through_spruce"), FeedingThroughSpruce);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "feeding_through_acacia"), FeedingThroughAcacia);
 			helper.register(new ResourceLocation(CharcoalPit.MODID, "feeding_through_warped"), FeedingThroughWarped);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "pottery_kiln"), Kiln);
 		});
 		/*event.getRegistry().registerAll(CeramicPot.setRegistryName("ceramic_pot"), YellowPot.setRegistryName("yellow_pot"), WhitePot.setRegistryName("white_pot"),
 				RedPot.setRegistryName("red_pot"), PurplePot.setRegistryName("purple_pot"), PinkPot.setRegistryName("pink_pot"), OrangePot.setRegistryName("orange_pot"),
@@ -213,10 +216,10 @@ public class ModBlockRegistry {
 		@Override
 		protected void addTags() {
 			this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CokeBlock, ActiveCoalPile, SandyBrick, SandySlab, SandyStair, SandyWall, BrickCollector, SandyCollector,
-					NetherCollector, EndCollector, MechanicalBellows, CeramicPot, YellowPot, WhitePot, RedPot, PurplePot, PinkPot, OrangePot, MagentaPot,
-					LimePot, LightGrayPot, LightBluePot, GreenPot, GrayPot, CyanPot, BrownPot, BluePot, BlackPot, Bloomeryy, CharcoalBlock, Bloom, BlastFurnace);
+					NetherCollector, EndCollector, MechanicalBellows, /*CeramicPot, YellowPot, WhitePot, RedPot, PurplePot, PinkPot, OrangePot, MagentaPot,
+					LimePot, LightGrayPot, LightBluePot, GreenPot, GrayPot, CyanPot, BrownPot, BluePot, BlackPot, */Bloomeryy, CharcoalBlock, Bloom, BlastFurnace);
 			this.tag(BlockTags.MINEABLE_WITH_AXE).add(LogPile, ActiveLogPile, Bellows, Barrel, BanananaPod, CoconutPod, NestBox,
-					FeedingThrough,FeedingThroughAcacia,FeedingThroughBirch,FeedingThroughDark,FeedingThroughCrimson,FeedingThroughJungle,
+					FeedingThrough,FeedingThroughAcacia,FeedingThroughBirch,/*FeedingThroughDark,*///FeedingThroughCrimson,FeedingThroughJungle,
 					FeedingThroughWarped,FeedingThroughSpruce);
 			this.tag(BlockTags.MINEABLE_WITH_HOE).add(Thatch, AppleLeaves, CherryLeaves, DragonLeaves, ChestnutLeaves,OrangeLeaves,OliveLeaves);
 			this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(WoodAsh, CoalAsh, Ash);

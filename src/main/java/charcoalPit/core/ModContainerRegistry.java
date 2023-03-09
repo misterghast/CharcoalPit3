@@ -3,8 +3,11 @@ package charcoalPit.core;
 import charcoalPit.CharcoalPit;
 import charcoalPit.gui.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -55,6 +58,7 @@ public class ModContainerRegistry {
 
 		});
 	}
+
 	
 	
 }

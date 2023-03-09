@@ -10,22 +10,22 @@ import net.minecraftforge.event.village.WandererTradesEvent;
 
 public class Trades {
 	
-	public static VillagerTrades.ItemListing AppleSapling=new BasicItemListing(12,new ItemStack(ModItemRegistry.AppleSapling),6,1);
+	/*public static VillagerTrades.ItemListing AppleSapling=new BasicItemListing(12,new ItemStack(ModItemRegistry.AppleSapling),6,1);
 	public static VillagerTrades.ItemListing CherrySapling=new BasicItemListing(12,new ItemStack(ModItemRegistry.CherrySapling),6,1);
 	public static VillagerTrades.ItemListing ChestnutSapling=new BasicItemListing(4,new ItemStack(ModItemRegistry.ChestnutSapling),12,1);
 	public static VillagerTrades.ItemListing DragonSapling=new BasicItemListing(16,new ItemStack(ModItemRegistry.DragonSapling),6,1);
 	public static VillagerTrades.ItemListing OliveSapling=new BasicItemListing(16,new ItemStack(ModItemRegistry.OliveSapling),6,1);
-	public static VillagerTrades.ItemListing OrangeSapling=new BasicItemListing(12,new ItemStack(ModItemRegistry.OrangeSapling),6,1);
+	public static VillagerTrades.ItemListing OrangeSapling=new BasicItemListing(12,new ItemStack(ModItemRegistry.OrangeSapling),6,1);*/
 	public static VillagerTrades.ItemListing BananaSapling=new BasicItemListing(12,new ItemStack(ModItemRegistry.Bananana),6,1);
 	public static VillagerTrades.ItemListing CoconutSapling=new BasicItemListing(12,new ItemStack(ModItemRegistry.Cococonut),6,1);
 	
 	public static void SaplingTrades(WandererTradesEvent event){
-		event.getRareTrades().add(AppleSapling);
+		/*event.getRareTrades().add(AppleSapling);
 		event.getRareTrades().add(CherrySapling);
 		event.getRareTrades().add(ChestnutSapling);
 		event.getRareTrades().add(DragonSapling);
 		event.getRareTrades().add(OliveSapling);
-		event.getRareTrades().add(OrangeSapling);
+		event.getRareTrades().add(OrangeSapling);*/
 		event.getRareTrades().add(BananaSapling);
 		event.getRareTrades().add(CoconutSapling);
 	}

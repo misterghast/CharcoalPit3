@@ -148,7 +148,7 @@ public class BlockBarrel extends Block implements SimpleWaterloggedBlock, Entity
 				ItemHandlerHelper.giveItemToPlayer(player,stack);
 				return InteractionResult.SUCCESS;
 			}
-			if(tile.tank.getFluid().getFluid()==ModFluidRegistry.VinegarStill&&tile.tank.getFluidAmount()>=250){
+			/*if(tile.tank.getFluid().getFluid()==ModFluidRegistry.VinegarStill&&tile.tank.getFluidAmount()>=250){
 				player.getItemInHand(handIn).shrink(1);
 				ItemStack stack=new ItemStack(ModItemRegistry.VinegarBottle);
 				tile.tank.drain(250, IFluidHandler.FluidAction.EXECUTE);
@@ -168,7 +168,7 @@ public class BlockBarrel extends Block implements SimpleWaterloggedBlock, Entity
 				tile.tank.drain(250, IFluidHandler.FluidAction.EXECUTE);
 				ItemHandlerHelper.giveItemToPlayer(player,stack);
 				return InteractionResult.SUCCESS;
-			}
+			}*/
 		}
 		NetworkHooks.openScreen((ServerPlayer)player, new MenuProvider() {
 			

@@ -4,10 +4,12 @@ import charcoalPit.block.BlockFruitLeaves;
 import charcoalPit.core.ModBlockRegistry;
 import charcoalPit.core.ModContainerRegistry;
 import charcoalPit.core.ModItemRegistry;
+import charcoalPit.core.ModTileRegistry;
 import charcoalPit.entity.AirplaneModel;
 import charcoalPit.entity.AirplaneRenderer;
 import charcoalPit.entity.ModEntities;
 import charcoalPit.gui.*;
+import charcoalPit.tile.TESRPotteryKiln;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -35,7 +37,8 @@ import javax.annotation.Nullable;
 
 @EventBusSubscriber(modid=CharcoalPit.MODID ,bus=Bus.MOD ,value=Dist.CLIENT)
 public class ClientSetup {
-	
+
+
 	@SubscribeEvent
 	public static void init(FMLClientSetupEvent event) {
 		MenuScreens.register(ModContainerRegistry.CeramicPot, CeramicPotScreen::new);
@@ -45,24 +48,8 @@ public class ClientSetup {
 		MenuScreens.register(ModContainerRegistry.BlastFurnace, BlastFurnaceScreen::new);
 		MenuScreens.register(ModContainerRegistry.Distillery,DistilleryScreen::new);
 		MenuScreens.register(ModContainerRegistry.SteamPress,SteamPressScreen::new);
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.Leeks, RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.Corn,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.Sunflower,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.AppleSapling,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.AppleLeaves,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.CherrySapling,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.CherryLeaves,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.DragonLeaves,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.DragonSapling,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.ChestnutSapling,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.ChestnutLeaves,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.BanananaPod,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.CoconutPod,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.OliveSapling,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.OliveLeaves,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.OrangeSapling,RenderType.cutout());
-		ItemBlockRenderTypes.setRenderLayer(ModBlockRegistry.OrangeLeaves,RenderType.cutout());
-		event.enqueueWork(()->{
+
+		/*event.enqueueWork(()->{
 			ItemProperties.register(ModItemRegistry.AppleLeaves, new ResourceLocation(CharcoalPit.MODID,"stage"),(stack, arg2, entity, pseed)->{
 				if(stack.hasTag()&&stack.getTag().contains("stage")){
 					if(stack.getTag().getInt("stage")==3)
@@ -141,7 +128,7 @@ public class ClientSetup {
 				}
 				return 0F;
 			});
-		});
+		});*/
 	}
 	@SubscribeEvent
 	public static void registerColors(RegisterColorHandlersEvent.Item event){
@@ -155,7 +142,7 @@ public class ClientSetup {
 			}
 		}, ModItemRegistry.AlcoholBottle);
 		
-		event.getItemColors().register(new ItemColor() {
+		/*event.getItemColors().register(new ItemColor() {
 			@Override
 			public int getColor(ItemStack p_getColor_1_, int p_getColor_2_) {
 				if(p_getColor_2_==0){
@@ -282,7 +269,7 @@ public class ClientSetup {
 				}
 				return 0xFFFFFF;
 			}
-		},ModBlockRegistry.OrangeLeaves);
+		},ModBlockRegistry.OrangeLeaves);*/
 	}
 	
 	@SubscribeEvent
@@ -292,6 +279,7 @@ public class ClientSetup {
 	@SubscribeEvent
 	public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
 		event.registerEntityRenderer(ModEntities.AIRPLANE, AirplaneRenderer::new);
+		event.registerBlockEntityRenderer(ModTileRegistry.PotteryKiln, TESRPotteryKiln::new);
 	}
 	
 }

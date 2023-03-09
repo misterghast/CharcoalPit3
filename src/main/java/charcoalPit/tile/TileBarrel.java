@@ -2,9 +2,6 @@ package charcoalPit.tile;
 
 import java.util.NoSuchElementException;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import charcoalPit.core.ModItemRegistry;
 import charcoalPit.core.ModTileRegistry;
 import charcoalPit.fluid.ModFluidRegistry;
@@ -36,6 +33,9 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
 
 public class TileBarrel extends BlockEntity{
 
@@ -125,7 +125,7 @@ public class TileBarrel extends BlockEntity{
 					if(has_output_item) {
 						output.insertItem(0, new ItemStack(recipe.item_out.getItems()[0].getItem(), rounds*recipe.out_amount, recipe.nbt_out), false);
 					}
-				}else
+				}/*else
 					if(!input.getStackInSlot(0).isEmpty()) {
 						if(input.getStackInSlot(0).getItem()==Items.GLASS_BOTTLE){
 							if(tank.getFluid().getFluid()==ModFluidRegistry.AlcoholStill&&tank.getFluidAmount()>=250){
@@ -163,7 +163,7 @@ public class TileBarrel extends BlockEntity{
 							}
 						}
 						transferFluid();
-					}
+					}*/
 			
 		}else {
 			
