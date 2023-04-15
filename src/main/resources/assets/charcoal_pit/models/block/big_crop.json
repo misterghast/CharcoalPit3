@@ -36,5 +36,6 @@
                 "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#crop" }
             }
         }
-    ]
+    ],
+    "render_type": "cutout"
 }

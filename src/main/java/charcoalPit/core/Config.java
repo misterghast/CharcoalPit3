@@ -15,17 +15,23 @@ public class Config {
 	public static ForgeConfigSpec.BooleanValue RainyPottery;
 	public static ForgeConfigSpec.IntValue PotteryTime;
 	public static ForgeConfigSpec.IntValue StrawAmount,WoodAmount;
+
+	public static ForgeConfigSpec.BooleanValue ReusableKilnPots;
+	public static ForgeConfigSpec.BooleanValue ReusableFurnacePots;
 	
 	public static ForgeConfigSpec.IntValue BloomeryTime;
 	public static ForgeConfigSpec.IntValue BloomCooldown;
 	
 	public static ForgeConfigSpec.BooleanValue EnableBloomeryPickRequirement;
+
+	public static ForgeConfigSpec.BooleanValue EnableNaturalFruitTreeGrowth;
 	
 	static {
 		ForgeConfigSpec.Builder builder=new ForgeConfigSpec.Builder();
 		charcoalPitConfig(builder);
 		potteryKilnConfig(builder);
 		bloomeryConfig(builder);
+		treeConfig(builder);
 		CONFIG=builder.build();
 	}
 	
@@ -44,6 +50,8 @@ public class Config {
 		PotteryTime=builder.comment("The time kilns take to finish. 1000 Ticks = 1 MC hour").defineInRange("PotteryTime", 8000, 1000, Integer.MAX_VALUE);
 		StrawAmount=builder.comment("The amount of straw needed for the kiln").defineInRange("StrawAmount", 6, 1, 64);
 		WoodAmount=builder.comment("The amount of logs needed for the kiln").defineInRange("WoodAmount", 3, 1, 64);
+		ReusableKilnPots=builder.comment("Whether or not clay vessels should be reusable when used to smelt items in the pottery kiln.").define("ReusableKilnPots", false);
+		ReusableFurnacePots=builder.comment("Whether or not clay vessels should be reusable when used to smelt items in the furnace.").define("ReusableFurnacePots", false);
 		builder.pop();
 	}
 	
@@ -53,6 +61,12 @@ public class Config {
 		BloomCooldown=builder.comment("The time blooms take to cool down").defineInRange("BloomCooldown", 2000, 1000, Integer.MAX_VALUE);
 		EnableBloomeryPickRequirement=builder.comment("If the bloomery should require a higher tier pickaxe to mine. Disabled by default as none exist in vanilla before iron")
 				.define("EnableBloomeryPickRequirement", false);
+		builder.pop();
+	}
+
+	public static void treeConfig(ForgeConfigSpec.Builder builder) {
+		builder.push("World");
+		EnableNaturalFruitTreeGrowth=builder.comment("Whether or not to spawn fruit trees in biomes. With this set to false, the only way to obtain fruit trees is from structures.").define("NaturalFruitTrees", false);
 		builder.pop();
 	}
 	

@@ -6,6 +6,7 @@ import charcoalPit.core.ModItemRegistry;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -32,9 +33,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientBlockExtensions;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.Random;
+import java.util.function.Consumer;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -42,8 +45,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.ItemLike;
 
-public class BlockFruitLeaves extends Block {
-	
+public class BlockFruitLeaves extends Block{
+
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 	public static final IntegerProperty AGE=BlockStateProperties.AGE_7;
@@ -52,7 +55,7 @@ public class BlockFruitLeaves extends Block {
 	public final float tick_chance;
 	
 	public BlockFruitLeaves(Properties properties,ItemLike fruit,float tick_rate) {
-		super(properties);
+		super(properties.noOcclusion());
 		this.fruit=fruit;
 		this.tick_chance=tick_rate;
 		this.registerDefaultState(this.getStateDefinition().any().setValue(DISTANCE,7).setValue(PERSISTENT,false).setValue(AGE,0));
@@ -214,4 +217,6 @@ public class BlockFruitLeaves extends Block {
 			items.add(stack);
 		}
 	}
+
+
 }

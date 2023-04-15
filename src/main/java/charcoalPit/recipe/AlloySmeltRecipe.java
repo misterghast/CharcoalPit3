@@ -1,5 +1,6 @@
 package charcoalPit.recipe;
 
+import charcoalPit.core.Config;
 import charcoalPit.core.ModItemRegistry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -50,9 +51,14 @@ public class AlloySmeltRecipe extends AbstractCookingRecipe {
 		if(!pot.hasTag()||!pot.getTag().contains("inventory")||pot.getTag().getBoolean("empty")) {
 			return super.assemble(pInv);
 		}else{
-			ItemStackHandler result=new ItemStackHandler(1);
+			ItemStackHandler result=new ItemStackHandler(9);
 			result.setStackInSlot(0,ItemStack.of(pot.getTag().getCompound("result")));
-			ItemStack out=new ItemStack(ModItemRegistry.CrackedPot);
+			ItemStack out;
+			if( Config.ReusableFurnacePots.get()) {
+				out = new ItemStack(ModItemRegistry.CeramicPot);;
+			} else {
+				out = new ItemStack(ModItemRegistry.CrackedPot);
+			}
 			out.addTagElement("inventory",result.serializeNBT());
 			return out;
 		}

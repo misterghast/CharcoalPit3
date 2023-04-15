@@ -3,6 +3,7 @@ package charcoalPit.block;
 import java.util.Arrays;
 import java.util.List;
 
+import charcoalPit.core.Config;
 import charcoalPit.core.MethodHelper;
 import charcoalPit.gui.CeramicPotContainer;
 import charcoalPit.tile.TileBarrel;
@@ -104,7 +105,12 @@ public class BlockCeramicPot extends Block implements EntityBlock {
 			TooltipFlag flagIn) {
 		if(stack.hasTag()&&stack.getTag().contains("inventory")) {
 			CompoundTag compoundnbt = stack.getTag().getCompound("inventory");
-		    ItemStackHandler items=new ItemStackHandler(9);
+		    ItemStackHandler items;
+			if( Config.ReusableFurnacePots.get() || Config.ReusableKilnPots.get()) {
+				items = new ItemStackHandler(9);
+			} else {
+				items = new ItemStackHandler(1);
+			}
 		    items.deserializeNBT(compoundnbt);
 		    for(int k=0;k<9;k++) {
 		    	ItemStack itemstack=items.getStackInSlot(k);

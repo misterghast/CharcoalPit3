@@ -1,0 +1,6 @@
+{
+  "type": "charcoal_pit:configurable_modifier",
+  "biomes":  "#minecraft:is_forest",
+  "features": "charcoal_pit:cherry_tree",
+  "step": "vegetal_decoration"
+}

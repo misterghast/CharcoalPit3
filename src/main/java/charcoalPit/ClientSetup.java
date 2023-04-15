@@ -141,8 +141,9 @@ public class ClientSetup {
 				return 0xFFFFFF;
 			}
 		}, ModItemRegistry.AlcoholBottle);
-		
-		/*event.getItemColors().register(new ItemColor() {
+
+
+		event.getItemColors().register(new ItemColor() {
 			@Override
 			public int getColor(ItemStack p_getColor_1_, int p_getColor_2_) {
 				if(p_getColor_2_==0){
@@ -203,7 +204,6 @@ public class ClientSetup {
 				return 0xFFFFFF;
 			}
 		},ModItemRegistry.OrangeLeaves);
-		
 	}
 	
 	@SubscribeEvent
@@ -269,7 +269,8 @@ public class ClientSetup {
 				}
 				return 0xFFFFFF;
 			}
-		},ModBlockRegistry.OrangeLeaves);*/
+		},ModBlockRegistry.OrangeLeaves);
+		//TODO: Make leaf transparency based on graphics settings
 	}
 	
 	@SubscribeEvent

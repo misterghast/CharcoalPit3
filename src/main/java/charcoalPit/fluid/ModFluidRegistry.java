@@ -35,35 +35,43 @@ public class ModFluidRegistry {
 	public static ForgeFlowingFluid AlcoholStill;
 	public static ForgeFlowingFluid AlcoholFlowing;
     public static ForgeFlowingFluid.Properties Alcohol = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> AlcoholStill, () -> AlcoholFlowing);
-	/*public static final ResourceLocation vinegar_still=new ResourceLocation("minecraft:block/water_still"),
+	public static final ResourceLocation vinegar_still=new ResourceLocation("minecraft:block/water_still"),
 			vinegar_flowing=new ResourceLocation("minecraft:block/water_flow");
 	public static ForgeFlowingFluid VinegarStill, VinegarFlowing;
-	public static ForgeFlowingFluid.Properties Vinegar;
+	public static ForgeFlowingFluid.Properties Vinegar = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> VinegarStill, () -> VinegarFlowing);
 	
 	public static ForgeFlowingFluid CausticLyeStill;
-	public static ForgeFlowingFluid.Properties CausticLye;
-	
+	public static ForgeFlowingFluid CausticLyeFlowing;
+	public static ForgeFlowingFluid.Properties CausticLye = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> CausticLyeStill, () -> CausticLyeFlowing);
+
 	public static ForgeFlowingFluid OliveOilStill;
-	public static ForgeFlowingFluid.Properties OliveOil;
+	public static ForgeFlowingFluid OliveOilFlowing;
+	public static ForgeFlowingFluid.Properties OliveOil = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> OliveOilStill, () -> OliveOilFlowing);
 	
 	public static ForgeFlowingFluid WalnutOilStill;
-	public static ForgeFlowingFluid.Properties WalnutOil;
-	
+	public static ForgeFlowingFluid WalnutOilFlowing;
+	public static Properties WalnutOil = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> WalnutOilStill, () -> WalnutOilFlowing);
+
 	public static ForgeFlowingFluid SunflowerOilStill;
-	public static ForgeFlowingFluid.Properties SunflowerOil;
+	public static ForgeFlowingFluid SunflowerOilFlowing;
+	public static Properties SunflowerOil = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> SunflowerOilStill, () -> SunflowerOilFlowing);
 	
-	public static ForgeFlowingFluid BioDieselStill;
-	public static ForgeFlowingFluid.Properties BioDiesel;
+	public static ForgeFlowingFluid BiodieselStill;
+	public static ForgeFlowingFluid BiodieselFlowing;
+	public static Properties Biodiesel = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> BiodieselStill, () -> BiodieselFlowing);
 	
 	public static ForgeFlowingFluid EthanolStill;
-	public static ForgeFlowingFluid.Properties Ethanol;
-	
+	public static ForgeFlowingFluid EthanolFlowing;
+	public static Properties Ethanol = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> EthanolStill, () -> EthanolFlowing);
+
 	public static ForgeFlowingFluid EthoxideStill;
-	public static ForgeFlowingFluid.Properties Ethoxide;
+	public static ForgeFlowingFluid EthoxideFlowing;
+	public static Properties Ethoxide = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> EthoxideStill, () -> EthoxideFlowing);
 	
 	public static ForgeFlowingFluid SeedOilStill;
-	public static ForgeFlowingFluid.Properties SeedOil;
-	*/
+	public static ForgeFlowingFluid SeedOilFlowing;
+	public static Properties SeedOil = new Properties(() -> new FluidType(FluidType.Properties.create()), () -> SeedOilStill, () -> SeedOilFlowing);
+
 	@SubscribeEvent
 	public static void registerFluids(RegisterEvent event) {
 		event.register(ForgeRegistries.Keys.FLUIDS, helper -> {
@@ -74,6 +82,24 @@ public class ModFluidRegistry {
                     AlcoholStill);
             helper.register(new ResourceLocation(CharcoalPit.MODID, "alcohol_flowing"),
                     AlcoholFlowing);
+			helper.register(new ResourceLocation("minecraft:block/water_still"), VinegarStill);
+			helper.register(new ResourceLocation("minecraft:block/water_flowing"), VinegarFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "caustic_lye_still"), CausticLyeStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "caustic_lye_flowing"), CausticLyeFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "olive_oil_still"), OliveOilStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "olive_oil_flowing"), OliveOilFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "walnut_oil_still"), WalnutOilStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "walnut_oil_flowing"), WalnutOilFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "sunflower_oil_still"), SunflowerOilStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "sunflower_oil_flowing"), SunflowerOilFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "biodiesel_still"), BiodieselStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "biodiesel_flowing"), BiodieselFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "ethanol_still"), EthanolStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "ethanol_flowing"), EthanolFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "ethoxide_still"), EthoxideStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "ethoxide_flowing"), EthoxideFlowing);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "seed_oil_still"), SeedOilStill);
+			helper.register(new ResourceLocation(CharcoalPit.MODID, "seed_oil_flowing"), SeedOilFlowing);
         });
     }
 			/*helper.register(new ResourceLocation(CharcoalPit.MODID, "alcohol_still"),

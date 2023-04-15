@@ -2,6 +2,7 @@ package charcoalPit.recipe;
 
 import java.util.List;
 
+import charcoalPit.core.Config;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -42,7 +43,7 @@ public class PotteryKilnRecipe implements Recipe<Container> {
     }
 
     public static boolean isValidInput(ItemStack input, Level world) {
-        if(input.getItem()==ModItemRegistry.ClayPot) {
+        if(input.getItem()==ModItemRegistry.ClayPot || (input.getItem()==ModItemRegistry.CeramicPot&&Config.ReusableKilnPots.get())) {
             if(input.hasTag()&&input.getTag().contains("inventory")) {
                 ItemStackHandler inv=new ItemStackHandler();
                 inv.deserializeNBT(input.getTag().getCompound("inventory"));
@@ -78,9 +79,16 @@ public class PotteryKilnRecipe implements Recipe<Container> {
     public static ItemStack processClayPot(ItemStack in, Level world) {
         if(in.getItem()==ModItemRegistry.ClayPot) {
             if(in.hasTag()&&in.getTag().contains("inventory")) {
-                ItemStackHandler tag=new ItemStackHandler(1);
-                tag.setStackInSlot(0, OreKilnRecipe.OreKilnGetOutput(in.getTag().getCompound("inventory"), world));
-                ItemStack out=new ItemStack(ModItemRegistry.CrackedPot);
+                ItemStackHandler tag;
+                ItemStack out;
+                if( Config.ReusableKilnPots.get()) {
+                    out = new ItemStack(ModItemRegistry.CeramicPot);
+                    tag=new ItemStackHandler(9);
+                } else {
+                    out = new ItemStack(ModItemRegistry.CrackedPot);
+                    tag=new ItemStackHandler(1);
+                }
+                tag.insertItem(0, OreKilnRecipe.OreKilnGetOutput(in.getTag().getCompound("inventory"), world), false);
                 out.addTagElement("inventory", tag.serializeNBT());
                 ItemStackHandler inv=new ItemStackHandler();
                 inv.deserializeNBT(in.getTag().getCompound("inventory"));

@@ -27,7 +27,7 @@ public class DragonFoliagePlacer extends FoliagePlacer {
 	
 	@Override
 	protected FoliagePlacerType<?> type() {
-		return ModFeatures.DRAGON_PLACER;
+		return ModFeatures.DRAGON_FOLIAGE_PLACER.get();
 	}
 
 	@Override

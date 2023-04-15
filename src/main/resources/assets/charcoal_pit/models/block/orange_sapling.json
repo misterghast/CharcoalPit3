@@ -2,5 +2,6 @@
   "parent": "minecraft:block/cross",
   "textures": {
     "cross": "charcoal_pit:block/orange_sapling"
-  }
+  },
+  "render_type": "cutout"
 }

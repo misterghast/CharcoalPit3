@@ -62,6 +62,10 @@ public class BlockBloom extends Block implements EntityBlock {
 			tile.workCount++;
 			return false;
 		}
+
+		if(level.isClientSide()) {
+			System.out.println(tile.items);
+		}
 		return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
 	}
 	

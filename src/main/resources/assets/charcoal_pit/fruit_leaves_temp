@@ -1,0 +1,7 @@
+/*"down":  { "texture": "#side", "tintindex":0, "cullface": "down" },
+                "up":    { "texture": "#side", "tintindex":0, "cullface": "up" },
+                "north": { "texture": "#side", "tintindex":0, "cullface": "north" },
+                "south": { "texture": "#side", "tintindex":0, "cullface": "south" },
+                "west":  { "texture": "#side", "tintindex":0, "cullface": "west" },
+                "east":  { "texture": "#side", "tintindex":0, "cullface": "east" },
+                "down":  { "texture": "#side", "tintindex":0, "cullface": "down" },*/

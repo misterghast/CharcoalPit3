@@ -150,6 +150,7 @@ public class TilePotteryKiln extends BlockEntity {
         xp=nbt.getFloat("xp");
         isValid=nbt.getBoolean("valid");
         pottery.deserializeNBT(nbt.getCompound("pottery"));
+        System.out.println(pottery.getStackInSlot(0).getItem());
     }
 
     @Override

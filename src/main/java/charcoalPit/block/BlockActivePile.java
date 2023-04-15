@@ -4,6 +4,7 @@ import java.util.Random;
 
 import charcoalPit.tile.BlockPileTicker;
 import charcoalPit.tile.TileActivePile;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -67,9 +68,18 @@ public class BlockActivePile extends Block implements EntityBlock {
 		((TileActivePile)worldIn.getBlockEntity(pos)).isValid=false;
 	}
 
-	//@OnlyIn(Dist.CLIENT)
-	//public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
-
-	//}
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public void animateTick(BlockState pState, Level worldIn, BlockPos pos, RandomSource rand) {
+		double centerX = pos.getX() + 0.5F;
+		double centerY = pos.getY() + 2F;
+		double centerZ = pos.getZ() + 0.5F;
+		//double d3 = 0.2199999988079071D;
+		//double d4 = 0.27000001072883606D;
+		worldIn.addParticle(ParticleTypes.SMOKE, centerX+(rand.nextDouble()-0.5), centerY, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);
+		worldIn.addParticle(ParticleTypes.SMOKE, centerX+(rand.nextDouble()-0.5), centerY, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.15D, 0.0D);
+		worldIn.addParticle(ParticleTypes.SMOKE, centerX+(rand.nextDouble()-0.5), centerY-1, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.1D, 0.0D);
+		worldIn.addParticle(ParticleTypes.SMOKE, centerX+(rand.nextDouble()-0.5), centerY-1, centerZ+(rand.nextDouble()-0.5), 0.0D, 0.15D, 0.0D);
+	}
 
 }

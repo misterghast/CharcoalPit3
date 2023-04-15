@@ -27,7 +27,7 @@ public class OrangeFoliagePlacer extends FoliagePlacer {
 	
 	@Override
 	protected FoliagePlacerType<?> type() {
-		return ModFeatures.ORANGE_PLACER;
+		return ModFeatures.ORANGE_FOLIAGE_PLACER.get();
 	}
 	
 	@Override

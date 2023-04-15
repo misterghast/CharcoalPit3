@@ -1,0 +1,6 @@
+{
+  "type": "charcoal_pit:configurable_modifier",
+  "biomes":  "#minecraft:is_mountain",
+  "features": "charcoal_pit:chestnut_tree",
+  "step": "vegetal_decoration"
+}

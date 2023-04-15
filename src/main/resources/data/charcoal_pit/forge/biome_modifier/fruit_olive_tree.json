@@ -1,0 +1,6 @@
+{
+  "type": "charcoal_pit:configurable_modifier",
+  "biomes":  "#minecraft:is_hill",
+  "features": "charcoal_pit:olive_tree",
+  "step": "vegetal_decoration"
+}
